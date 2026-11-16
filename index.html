@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gao Xinyi</title>
+<meta name="description" content="创造，表达，链接。知识视频生产线、GEO 检测系统与法律咨询工作流。">
+<meta property="og:title" content="Gao Xinyi">
+<meta property="og:description" content="创造，表达，链接。知识视频生产线、GEO 检测系统与法律咨询工作流。">
+<meta property="og:url" content="https://j-ade-g.github.io/">
+<meta property="og:image" content="https://j-ade-g.github.io/assets/video/poster-demo.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%23fafaf7' stroke='%238b7eaa' stroke-width='5'/%3E%3Ccircle cx='50' cy='50' r='16' fill='%238b7eaa'/%3E%3C/svg%3E">
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #fafaf7;
+    --text:      #1f1a18;
+    --muted:     #8a827c;
+    --faint:     #c4beb7;
+    --beige:     #e8e2d9;
+    --beige-dk:  #d6cec4;
+    --lavender:  #8b7eaa;
+    --lavender-lt: #f3f0f7;
+    --green:     #5f7d4f;
+    --green-lt:  #eef2e9;
+    --white:     #fff;
+    --border:    1px solid #e0dbd4;
+    --radius:    6px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Switzer', -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::after {
+    content: '';
+    position: fixed; inset: 0;
+    pointer-events: none; z-index: 9999;
+    opacity: 0.022;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 140px 140px;
+  }
+
+  .wrap { max-width: 920px; margin: 0 auto; padding: 0 3rem; }
+
+  nav { padding: 2.2rem 0 0; position: relative; z-index: 10; }
+  nav .inner {
+    display: flex; gap: 2.4rem; flex-wrap: wrap;
+    font-size: 0.95rem; font-weight: 500;
+    letter-spacing: 0.03em;
+  }
+  nav a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  nav a:hover { color: var(--lavender); }
+
+  section { padding-top: 9rem; }
+
+  /* ═══════════ HERO ═══════════ */
+  .hero { padding-top: 6rem; }
+  .hero-inner { display: flex; gap: 2.8rem; align-items: flex-start; }
+  .hero-avatar {
+    width: 100px; height: 100px;
+    border-radius: 50%; object-fit: cover;
+    flex-shrink: 0;
+    filter: contrast(1.04);
+    border: 2px solid var(--beige-dk);
+  }
+  .hero-en {
+    font-size: 2.5rem; font-weight: 500;
+    line-height: 1.25; letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+  .hero-en em { color: var(--lavender); font-style: italic; }
+  .hero-cn { color: var(--muted); font-size: 1.02rem; margin-bottom: 0.6rem; }
+  .hero-tagline {
+    display: inline-block; margin-top: 0.4rem;
+    font-size: 0.82rem; color: var(--lavender);
+    letter-spacing: 0.06em; text-transform: uppercase;
+  }
+
+  /* ═══════════ SECTION LABEL ═══════════ */
+  .sec-label {
+    display: flex; align-items: baseline; gap: 1.2rem;
+    padding-bottom: 1rem; margin-bottom: 2.4rem;
+    border-bottom: var(--border);
+  }
+  .sec-num {
+    font-size: 0.78rem; color: var(--faint);
+    font-weight: 600; letter-spacing: 0.06em;
+  }
+  .sec-name {
+    font-size: 1.5rem; font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .about-statement {
+    font-size: 1.12rem; line-height: 1.8; color: #3a332e;
+    max-width: 44em;
+  }
+
+  /* ═══════════ BUILD ═══════════ */
+  .build-group { margin-bottom: 3rem; }
+  .build-group-label {
+    font-size: 0.78rem; color: var(--muted);
+    letter-spacing: 0.1em; margin-bottom: 1rem;
+    text-transform: uppercase;
+  }
+  .build-cards { display: grid; gap: 1rem; }
+  .proj {
+    display: block; text-decoration: none; color: inherit;
+    background: var(--white);
+    border: var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem 1.6rem;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  }
+  a.proj:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(31, 26, 24, 0.06);
+    border-color: var(--beige-dk);
+  }
+  .p-top {
+    display: flex; justify-content: space-between;
+    font-size: 0.75rem; color: var(--muted);
+    letter-spacing: 0.04em; margin-bottom: 0.5rem;
+  }
+  .p-status { color: var(--green); }
+  .p-status.done { color: var(--muted); }
+  .proj h3 { font-size: 1.22rem; font-weight: 600; margin-bottom: 0.45rem; }
+  .p-desc { color: #57504a; font-size: 0.95rem; line-height: 1.7; }
+  .p-bar { height: 3px; background: var(--beige); border-radius: 2px; margin: 1.1rem 0 0.8rem; }
+  .p-bar-inner { height: 100%; border-radius: 2px; }
+  .p-tags {
+    font-size: 0.78rem; color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  /* ═══════════ VIDEOS ═══════════ */
+  .videos-sub { color: var(--muted); font-size: 1rem; margin: -1rem 0 2rem; }
+  .film { margin-bottom: 3.2rem; }
+  .film video {
+    width: 100%; display: block;
+    background: #16120f;
+    border-radius: var(--radius);
+    border: var(--border);
+  }
+  .film-head {
+    display: flex; align-items: baseline; gap: 1rem;
+    flex-wrap: wrap; margin-bottom: 0.7rem;
+  }
+  .film-head h3 { font-size: 1.15rem; font-weight: 600; }
+  .film-meta { font-size: 0.8rem; color: var(--muted); letter-spacing: 0.03em; }
+  .film-cap { font-size: 0.9rem; color: var(--muted); margin-top: 0.7rem; }
+  .chips { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem; }
+  .chip {
+    font: inherit; font-size: 0.82rem; color: var(--muted);
+    background: var(--white);
+    border: var(--border);
+    border-radius: 999px;
+    padding: 0.42rem 0.9rem;
+    cursor: pointer;
+    transition: all 0.18s;
+  }
+  .chip:hover { border-color: var(--beige-dk); color: var(--text); }
+  .chip[aria-pressed="true"] {
+    background: var(--text); color: var(--bg); border-color: var(--text);
+  }
+
+  /* ═══════════ REPORT ═══════════ */
+  .report {
+    background: #fdfcf8;
+    border: var(--border);
+    border-radius: var(--radius);
+    padding: 2.6rem 2.8rem 2.2rem;
+    font-family: 'Noto Serif SC', 'Songti SC', serif;
+  }
+  .report-kicker {
+    font-size: 0.72rem; letter-spacing: 0.14em;
+    color: var(--green); margin-bottom: 1rem;
+    font-family: 'Switzer', sans-serif;
+    text-transform: uppercase;
+  }
+  .report h3 {
+    font-size: 1.72rem; font-weight: 700;
+    line-height: 1.45; margin-bottom: 0.8rem;
+  }
+  .report-sub {
+    font-size: 0.92rem; color: #6b635b; line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+  .metrics {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1.2rem;
+    border-top: 1px solid #d9d3c7;
+    border-bottom: 1px solid #d9d3c7;
+    padding: 1.6rem 0;
+    margin-bottom: 2.2rem;
+  }
+  .metric .num {
+    font-size: 2.1rem; font-weight: 600; line-height: 1.1;
+  }
+  .metric .num small { font-size: 0.9rem; font-weight: 400; color: #8a827c; }
+  .metric .lbl { font-size: 0.8rem; color: #6b635b; margin-top: 0.4rem; }
+  .metric .calc {
+    font-size: 0.72rem; color: #a39a8f; margin-top: 0.15rem;
+    font-family: 'Switzer', sans-serif;
+  }
+  .r-block { margin-bottom: 2rem; }
+  .r-h {
+    font-size: 0.78rem; color: var(--green);
+    letter-spacing: 0.1em; margin-bottom: 0.9rem;
+    font-family: 'Switzer', sans-serif; font-weight: 600;
+  }
+  .bars { display: grid; gap: 0.75rem; }
+  .bar-row { display: grid; grid-template-columns: 6.5em 1fr 4.5em; align-items: center; gap: 0.9rem; }
+  .bar-row .bl { font-size: 0.85rem; color: #4b443e; }
+  .bar-track { height: 8px; background: #ece7dc; border-radius: 4px; overflow: hidden; }
+  .bar-fill { height: 100%; background: #2f2b26; border-radius: 4px; }
+  .bar-fill.light { background: var(--green); }
+  .bar-row .bv { font-size: 0.8rem; color: #6b635b; text-align: right; font-family: 'Switzer', sans-serif; }
+  .findings { display: grid; gap: 0.85rem; }
+  .finding { display: flex; gap: 0.9rem; font-size: 0.92rem; line-height: 1.75; color: #3f3a34; }
+  .finding b { font-weight: 600; flex-shrink: 0; }
+  .finding i { font-style: normal; color: var(--green); font-family: 'Switzer', sans-serif; font-size: 0.78rem; font-weight: 600; padding-top: 0.32rem; min-width: 1.2em; }
+  .r-quote {
+    border-left: 3px solid var(--green);
+    background: var(--green-lt);
+    padding: 1.1rem 1.4rem;
+    font-size: 1rem; line-height: 1.8; color: #3a4634;
+  }
+  .r-note {
+    font-size: 0.78rem; color: #8a827c; line-height: 1.7;
+    margin-top: 2rem; padding-top: 1.2rem;
+    border-top: 1px solid #e7e2d7;
+    font-family: 'Switzer', sans-serif;
+  }
+
+  /* ═══════════ WALK ═══════════ */
+  .walk-card {
+    background: var(--lavender-lt);
+    border: 1px solid #e4dff0;
+    border-radius: var(--radius);
+    padding: 2.8rem;
+    text-align: center;
+  }
+  .walk-card h2 { font-size: 1.6rem; font-weight: 600; margin-bottom: 0.7rem; }
+  .walk-card .wsub {
+    color: var(--muted); font-size: 0.95rem;
+    max-width: 34em; margin: 0 auto 1.8rem;
+  }
+  .walk-links { display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; }
+  .walk-btn {
+    text-decoration: none; color: var(--text);
+    background: var(--white);
+    border: var(--border);
+    border-radius: 999px;
+    padding: 0.55rem 1.4rem;
+    font-size: 0.88rem; font-weight: 500;
+    transition: all 0.18s;
+  }
+  .walk-btn:hover { border-color: var(--lavender); color: var(--lavender); }
+
+  footer {
+    padding: 5rem 0 3rem;
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--faint);
+    letter-spacing: 0.06em;
+  }
+
+  @media (max-width: 720px) {
+    .wrap { padding: 0 1.4rem; }
+    section { padding-top: 6rem; }
+    .hero-inner { flex-direction: column; gap: 1.6rem; }
+    .hero-en { font-size: 1.9rem; }
+    .metrics { grid-template-columns: repeat(2, 1fr); gap: 1.4rem; }
+    .report { padding: 1.6rem 1.3rem 1.4rem; }
+    .report h3 { font-size: 1.34rem; }
+    .bar-row { grid-template-columns: 5em 1fr 3.6em; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <nav>
+    <div class="inner">
+      <a href="#about">about</a>
+      <a href="#build">build</a>
+      <a href="#videos">videos</a>
+      <a href="#report">report</a>
+      <a href="#walk">walk together</a>
+    </div>
+  </nav>
+
+  <!-- ═══════ HERO ═══════ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <img class="hero-avatar" src="profile.jpg" alt="Gao Xinyi">
+      <div class="hero-text">
+        <p class="hero-en"><em>I build, I speak</em> — hope we can all live a little more awake, a little more at ease.</p>
+        <p class="hero-cn">创造，表达，链接。把在这个世界穿梭时学到的东西，放在这里。</p>
+        <p class="hero-tagline">AI 产品建造者 · 知识视频 · GEO</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ ABOUT ═══════ -->
+  <section id="about">
+    <div class="sec-label">
+      <span class="sec-num">01</span>
+      <span class="sec-name">About</span>
+    </div>
+    <p class="about-statement">我在南京大学研究社会心理学，目前在百度 AI 搜索业务做 PM intern。最近在做两件事：把知识视频从脚本到成片的整条生产线工具化；帮品牌看清自己在 AI 回答里被怎样对待。Learn in public, build in public.</p>
+  </section>
+
+  <!-- ═══════ BUILD ═══════ -->
+  <section id="build">
+    <div class="sec-label">
+      <span class="sec-num">02</span>
+      <span class="sec-name">Build</span>
+    </div>
+
+    <div class="build-group">
+      <p class="build-group-label">现在进行中</p>
+      <div class="build-cards">
+        <a class="proj" href="#videos">
+          <div class="p-top">
+            <span class="p-status">active</span>
+            <span class="p-date">2026.11</span>
+          </div>
+          <h3>知识视频生产线</h3>
+          <p class="p-desc">从口播脚本到成片的一条线：网页分镜、克隆音色配音、标签页录制、一条命令自动裁切、掐头去尾、按章切条。本页的视频就是它做的。</p>
+          <div class="p-bar"><div class="p-bar-inner" style="width:85%;background:var(--green);"></div></div>
+          <p class="p-tags">TypeScript · Vite · Qwen3-TTS · ffmpeg</p>
+        </a>
+        <a class="proj" href="#report">
+          <div class="p-top">
+            <span class="p-status">active</span>
+            <span class="p-date">2026.11</span>
+          </div>
+          <h3>GEO 检测系统</h3>
+          <p class="p-desc">单机 GEO 运营系统。用真实提问采集 DeepSeek、豆包、元宝、千问、百度的回答，计算提及率、首选率、声量份额与信源归因，产出顾问式报告。</p>
+          <div class="p-bar"><div class="p-bar-inner" style="width:75%;background:var(--green);"></div></div>
+          <p class="p-tags">Node · SQLite · Playwright CDP · 报告自动化</p>
+        </a>
+      </div>
+    </div>
+
+    <div class="build-group">
+      <p class="build-group-label">可参观</p>
+      <div class="build-cards">
+        <a class="proj" href="#videos">
+          <div class="p-top">
+            <span class="p-status done">completed</span>
+          </div>
+          <h3>法律咨询 · 律径</h3>
+          <p class="p-desc">法律咨询问答 + 可解释的法律检索工作流。回答逐条给出依据法条与出处，检索路径在右栏同步展开，让「为什么这么答」可见。</p>
+          <div class="p-bar"><div class="p-bar-inner" style="width:100%;background:var(--green);"></div></div>
+          <p class="p-tags">法律咨询 · 检索工作流 · RAG</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ VIDEOS ═══════ -->
+  <section id="videos">
+    <div class="sec-label">
+      <span class="sec-num">03</span>
+      <span class="sec-name">Videos</span>
+    </div>
+    <p class="videos-sub">把想法讲成片子。</p>
+
+    <div class="film">
+      <div class="film-head">
+        <h3>后训练：为什么模型需要被教才好用</h3>
+        <span class="film-meta">92 秒 · 3 章 16 个分镜 · 自动配音与剪辑</span>
+      </div>
+      <video id="player" controls preload="metadata" playsinline poster="assets/video/poster-demo.jpg">
+        <source src="assets/video/demo-1080p.mp4" type="video/mp4">
+      </video>
+      <div class="chips" id="chapters">
+        <button class="chip" aria-pressed="true" data-src="assets/video/demo-1080p.mp4" data-poster="assets/video/poster-demo.jpg" data-title="后训练：为什么模型需要被教才好用">全片 92s</button>
+        <button class="chip" aria-pressed="false" data-src="assets/video/demo-01-why-posttrain.mp4" data-poster="assets/video/poster-demo.jpg" data-title="01 为什么需要后训练">01 为什么需要后训练 14s</button>
+        <button class="chip" aria-pressed="false" data-src="assets/video/demo-02-pipeline.mp4" data-poster="assets/video/poster-pipeline.jpg" data-title="02 八步后训练流水线">02 八步流水线 54s</button>
+        <button class="chip" aria-pressed="false" data-src="assets/video/demo-03-pitfalls.mp4" data-poster="assets/video/poster-demo.jpg" data-title="03 1% 的数据与三个坑">03 1% 的数据与三个坑 24s</button>
+      </div>
+      <p class="film-cap" id="film-cap">全片：从「聪明还是智障」讲到「以数据和反馈为中心的系统工程」。</p>
+    </div>
+
+    <div class="film">
+      <div class="film-head">
+        <h3>律径 · 法律咨询工作流</h3>
+        <span class="film-meta">69 秒 · 屏幕操作演示 · 无音轨</span>
+      </div>
+      <video controls preload="metadata" playsinline poster="assets/video/poster-legal.jpg">
+        <source src="assets/video/legal-workflow.mp4" type="video/mp4">
+      </video>
+      <p class="film-cap">左侧是法律咨询问答（未签劳动合同的双倍工资问题），右侧同步展开检索、比对与引用路径。</p>
+    </div>
+  </section>
+
+  <!-- ═══════ REPORT ═══════ -->
+  <section id="report">
+    <div class="sec-label">
+      <span class="sec-num">04</span>
+      <span class="sec-name">Report &nbsp;/&nbsp; 样例</span>
+    </div>
+
+    <div class="report">
+      <p class="report-kicker">AI Visibility Baseline · 2026</p>
+      <h3>AI 愿意把你放进候选，<br>但只有被点名时，它才想得到你。</h3>
+      <p class="report-sub">客户为南京一家高端伴手礼品牌。2026 年 11 月基线：6 个真实购买问题 × 5 个 AI 平台 = 30 条回答。以下为脱敏摘要，完整报告约 11 页。</p>
+
+      <div class="metrics">
+        <div class="metric">
+          <div class="num">36.7<small>%</small></div>
+          <div class="lbl">提及率</div>
+          <div class="calc">11 / 30 条回答</div>
+        </div>
+        <div class="metric">
+          <div class="num">16.7<small>%</small></div>
+          <div class="lbl">首选率</div>
+          <div class="calc">5 / 30 条回答</div>
+        </div>
+        <div class="metric">
+          <div class="num">11.1<small>%</small></div>
+          <div class="lbl">声量份额</div>
+          <div class="calc">11 / 总计 99 次</div>
+        </div>
+        <div class="metric">
+          <div class="num">0<small>/30</small></div>
+          <div class="lbl">自有信源召回</div>
+          <div class="calc">无一条引用官方内容</div>
+        </div>
+      </div>
+
+      <div class="r-block">
+        <p class="r-h">按问题类型拆分</p>
+        <div class="bars">
+          <div class="bar-row">
+            <span class="bl">品牌题</span>
+            <div class="bar-track"><div class="bar-fill" style="width:100%;"></div></div>
+            <span class="bv">5 / 5</span>
+          </div>
+          <div class="bar-row">
+            <span class="bl">对比题</span>
+            <div class="bar-track"><div class="bar-fill" style="width:100%;"></div></div>
+            <span class="bv">5 / 5</span>
+          </div>
+          <div class="bar-row">
+            <span class="bl">场景题</span>
+            <div class="bar-track"><div class="bar-fill light" style="width:5%;"></div></div>
+            <span class="bv">1 / 20</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="r-block">
+        <p class="r-h">三条判断</p>
+        <div class="findings">
+          <div class="finding"><i>i</i><span><b>归类偏差。</b>五个平台一致把品牌描述为「礼盒定制 / 高颜值伴手礼」，而不是「南京特产」，场景类问题因此不会主动调用。</span></div>
+          <div class="finding"><i>ii</i><span><b>证据缺失。</b>即使检索最勤的平台也要求「实地比对」：可检索内容几乎全部来自社交分享，没有权威第三方评测。</span></div>
+          <div class="finding"><i>iii</i><span><b>自有信源为零。</b>30 条回答没有一条引用品牌官方内容，AI 对品牌的全部认知建立在第三方转述之上。</span></div>
+        </div>
+      </div>
+
+      <div class="r-quote">问题不在平台投放预算，而在信源质量与归类：检索已经发生，却没有转化为推荐。</div>
+
+      <p class="r-note">样例已做脱敏：品牌名、门店影像与原始问答全文不在公开页面中。报告结构：执行摘要 · 问题面板 · 平台视图 · 命中矩阵 · 竞品格局 · 信源证据 · 行动建议 · 方法与局限。</p>
+    </div>
+  </section>
+
+  <!-- ═══════ WALK ═══════ -->
+  <section id="walk">
+    <div class="sec-label">
+      <span class="sec-num">05</span>
+      <span class="sec-name">Walk Together &nbsp;/&nbsp; 同行</span>
+    </div>
+    <div class="walk-card">
+      <h2>我们在路上见。</h2>
+      <p class="wsub">如果你也对创造用户价值、创造有意思的、独特的、有用而美的东西感兴趣，可以在这里找到我。</p>
+      <div class="walk-links">
+        <a class="walk-btn" href="https://xhslink.com/m/1gRZWl4BUvl" target="_blank" rel="noopener">小红书</a>
+        <a class="walk-btn" href="https://github.com/J-ade-g" target="_blank" rel="noopener">GitHub</a>
+        <a class="walk-btn" href="mailto:3261936960@qq.com">Email</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>© 2026 Gao Xinyi</footer>
+
+</div>
+
+<script>
+  const player = document.getElementById("player");
+  const chips = Array.from(document.querySelectorAll("#chapters .chip"));
+  const cap = document.getElementById("film-cap");
+  const caps = {
+    "后训练：为什么模型需要被教才好用": "全片：从「聪明还是智障」讲到「以数据和反馈为中心的系统工程」。",
+    "01 为什么需要后训练": "第一章：预训练只教它猜下一个词，没人教它怎样才算好。",
+    "02 八步后训练流水线": "第二章：数据准备、SFT、奖励模型、强化学习、DPO、拒绝采样、评测与迭代。",
+    "03 1% 的数据与三个坑": "第三章：后训练数据不到总 token 的 1%，却决定大部分体验。"
+  };
+  chips.forEach((chip) => {
+    chip.addEventListener("click", () => {
+      chips.forEach((c) => c.setAttribute("aria-pressed", String(c === chip)));
+      player.poster = chip.dataset.poster;
+      player.src = chip.dataset.src;
+      if (caps[chip.dataset.title]) cap.textContent = caps[chip.dataset.title];
+      player.load();
+      player.play().catch(() => {});
+    });
+  });
+</script>
+</body>
+</html>
