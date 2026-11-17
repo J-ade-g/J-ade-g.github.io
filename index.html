@@ -11,21 +11,21 @@
 <meta property="og:image" content="https://j-ade-g.github.io/assets/video/poster-demo.jpg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%23fafaf7' stroke='%238b7eaa' stroke-width='5'/%3E%3Ccircle cx='50' cy='50' r='16' fill='%238b7eaa'/%3E%3C/svg%3E">
 <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700,800&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Antonio:wght@300;400;500&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg:        #fafaf7;
-    --text:      #1f1a18;
-    --muted:     #8a827c;
-    --faint:     #c4beb7;
-    --beige:     #e8e2d9;
-    --beige-dk:  #d6cec4;
-    --lavender:  #8b7eaa;
-    --lavender-lt: #f3f0f7;
-    --green:     #5f7d4f;
-    --green-lt:  #eef2e9;
-    --white:     #fff;
-    --border:    1px solid #e0dbd4;
+    --bg:        #060709;
+    --text:      #f3ede0;
+    --muted:     #a49d8f;
+    --faint:     #6d685e;
+    --beige:     rgba(243, 237, 224, 0.12);
+    --beige-dk:  rgba(243, 237, 224, 0.26);
+    --lavender:  #c3b4e4;
+    --lavender-lt: rgba(150, 125, 196, 0.14);
+    --green:     #b3cd97;
+    --green-lt:  rgba(150, 190, 130, 0.12);
+    --white:     rgba(255, 255, 255, 0.05);
+    --border:    1px solid rgba(243, 237, 224, 0.12);
     --radius:    6px;
   }
 
@@ -37,7 +37,7 @@
     font-family: 'Switzer', -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif;
     background: var(--bg);
     color: var(--text);
-    line-height: 1.55;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -50,18 +50,12 @@
     background-size: 140px 140px;
   }
 
-  .wrap { max-width: 920px; margin: 0 auto; padding: 0 3rem; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 3rem; position: relative; z-index: 1; }
 
-  nav { padding: 2.2rem 0 0; position: relative; z-index: 10; }
-  nav .inner {
-    display: flex; gap: 2.4rem; flex-wrap: wrap;
-    font-size: 0.95rem; font-weight: 500;
-    letter-spacing: 0.03em;
-  }
-  nav a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
-  nav a:hover { color: var(--lavender); }
+  /* quiet paper meadow behind the whole site */
+  #meadow { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
 
-  section { padding-top: 9rem; }
+  section { padding-top: 10rem; }
 
   /* ═══════════ HERO ═══════════ */
   .hero { padding-top: 6rem; }
@@ -74,7 +68,7 @@
     border: 2px solid var(--beige-dk);
   }
   .hero-en {
-    font-size: 2.5rem; font-weight: 500;
+    font-size: 2.7rem; font-weight: 500;
     line-height: 1.25; letter-spacing: -0.02em;
     margin-bottom: 1rem;
   }
@@ -93,187 +87,259 @@
     border-bottom: var(--border);
   }
   .sec-num {
-    font-size: 0.78rem; color: var(--faint);
-    font-weight: 600; letter-spacing: 0.06em;
+    font-size: 0.74rem; color: var(--lavender);
+    font-weight: 600; letter-spacing: 0.14em; opacity: .75;
   }
   .sec-name {
-    font-size: 1.5rem; font-weight: 600;
-    letter-spacing: -0.01em;
-  }
-
-  .about-statement {
-    font-size: 1.12rem; line-height: 1.8; color: #3a332e;
-    max-width: 44em;
+    font-size: 1.9rem; font-weight: 600;
+    letter-spacing: -0.015em;
   }
 
   /* ═══════════ BUILD ═══════════ */
-  .build-group { margin-bottom: 3rem; }
-  .build-group-label {
-    font-size: 0.78rem; color: var(--muted);
-    letter-spacing: 0.1em; margin-bottom: 1rem;
-    text-transform: uppercase;
+  .work {
+    display: grid;
+    grid-template-columns: 0.42fr 0.58fr;
+    gap: 4.2rem;
+    align-items: center;
+    margin-bottom: 9.5rem;
   }
-  .build-cards { display: grid; gap: 1rem; }
+  .work.flip { grid-template-columns: 0.58fr 0.42fr; }
+  .work.flip .proj { order: 2; }
+  .work.flip .work-out { order: 1; }
   .proj {
     display: block; text-decoration: none; color: inherit;
-    background: var(--white);
-    border: var(--border);
-    border-radius: var(--radius);
-    padding: 1.5rem 1.6rem;
-    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    padding: 0;
   }
-  a.proj:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 24px rgba(31, 26, 24, 0.06);
-    border-color: var(--beige-dk);
-  }
+  a.proj { transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1); }
+  a.proj:hover { transform: translateY(-3px); }
+  a.proj:hover h3 { color: var(--lavender); }
+  .work-out .film { width: 100%; }
   .p-top {
     display: flex; justify-content: space-between;
-    font-size: 0.75rem; color: var(--muted);
-    letter-spacing: 0.04em; margin-bottom: 0.5rem;
+    font-size: 0.72rem; color: var(--faint);
+    letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.9rem;
   }
   .p-status { color: var(--green); }
   .p-status.done { color: var(--muted); }
-  .proj h3 { font-size: 1.22rem; font-weight: 600; margin-bottom: 0.45rem; }
-  .p-desc { color: #57504a; font-size: 0.95rem; line-height: 1.7; }
-  .p-bar { height: 3px; background: var(--beige); border-radius: 2px; margin: 1.1rem 0 0.8rem; }
-  .p-bar-inner { height: 100%; border-radius: 2px; }
+  .proj h3 { font-size: 1.45rem; font-weight: 600; margin-bottom: 0.7rem; letter-spacing: -0.01em; transition: color 0.3s; }
+  .p-desc { color: rgba(243, 237, 224, 0.64); font-size: 0.96rem; line-height: 1.85; }
   .p-tags {
-    font-size: 0.78rem; color: var(--muted);
-    letter-spacing: 0.04em;
+    font-size: 0.76rem; color: var(--faint);
+    letter-spacing: 0.06em; margin-top: 1.4rem;
+  }
+  .work-out { margin-top: 0; }
+  @media (max-width: 900px) {
+    .work, .work.flip { grid-template-columns: 1fr; gap: 2rem; margin-bottom: 6rem; }
+    .work.flip .proj, .work.flip .work-out { order: 0; }
   }
 
   /* ═══════════ VIDEOS ═══════════ */
-  .videos-sub { color: var(--muted); font-size: 1rem; margin: -1rem 0 2rem; }
-  .film { margin-bottom: 3.2rem; }
+  .film { margin-bottom: 0; }
   .film video {
     width: 100%; display: block;
-    background: #16120f;
-    border-radius: var(--radius);
-    border: var(--border);
+    background: #0a0a0c;
+    border-radius: 1.9rem 0.9rem 1.7rem 1rem / 1rem 1.8rem 0.9rem 1.9rem;
+    border: 1px solid rgba(243, 237, 224, 0.1);
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
   }
   .film-head {
     display: flex; align-items: baseline; gap: 1rem;
-    flex-wrap: wrap; margin-bottom: 0.7rem;
+    flex-wrap: wrap; margin-bottom: 0.8rem;
   }
-  .film-head h3 { font-size: 1.15rem; font-weight: 600; }
-  .film-meta { font-size: 0.8rem; color: var(--muted); letter-spacing: 0.03em; }
-  .film-cap { font-size: 0.9rem; color: var(--muted); margin-top: 0.7rem; }
-  .chips { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem; }
+  .film-head h3 { font-size: 1.18rem; font-weight: 600; }
+  .film-meta { font-size: 0.78rem; color: var(--faint); letter-spacing: 0.05em; }
+  .film-cap { font-size: 0.9rem; color: var(--muted); margin-top: 0.9rem; }
+  .chips { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.1rem; }
   .chip {
-    font: inherit; font-size: 0.82rem; color: var(--muted);
-    background: var(--white);
-    border: var(--border);
+    font: inherit; font-size: 0.8rem; color: var(--muted);
+    background: rgba(243, 237, 224, 0.035);
+    border: 1px solid rgba(243, 237, 224, 0.14);
     border-radius: 999px;
-    padding: 0.42rem 0.9rem;
+    padding: 0.45rem 0.95rem;
     cursor: pointer;
-    transition: all 0.18s;
+    transition: all 0.2s;
   }
-  .chip:hover { border-color: var(--beige-dk); color: var(--text); }
+  .chip:hover { border-color: rgba(243, 237, 224, 0.32); color: var(--text); }
   .chip[aria-pressed="true"] {
-    background: var(--text); color: var(--bg); border-color: var(--text);
+    background: var(--text); color: #0a0a0c; border-color: var(--text);
   }
-
   /* ═══════════ REPORT ═══════════ */
   .report {
-    background: #fdfcf8;
-    border: var(--border);
-    border-radius: var(--radius);
-    padding: 2.6rem 2.8rem 2.2rem;
+    background: linear-gradient(168deg, rgba(24, 24, 29, 0.9), rgba(9, 9, 11, 0.94));
+    border: 1px solid rgba(243, 237, 224, 0.1);
+    border-radius: 2.8rem 1.2rem 2.4rem 1.6rem / 1.6rem 2.4rem 1.2rem 2.8rem;
+    padding: 2.8rem 3rem 2.4rem;
     font-family: 'Noto Serif SC', 'Songti SC', serif;
+    box-shadow: 0 40px 90px rgba(0, 0, 0, 0.45);
   }
   .report-kicker {
-    font-size: 0.72rem; letter-spacing: 0.14em;
-    color: var(--green); margin-bottom: 1rem;
+    font-size: 0.72rem; letter-spacing: 0.16em;
+    color: var(--green); margin-bottom: 1.1rem;
     font-family: 'Switzer', sans-serif;
     text-transform: uppercase;
   }
   .report h3 {
-    font-size: 1.72rem; font-weight: 700;
-    line-height: 1.45; margin-bottom: 0.8rem;
+    font-size: 1.78rem; font-weight: 700;
+    line-height: 1.5; margin-bottom: 0.9rem;
+    color: #f6f0e3;
   }
   .report-sub {
-    font-size: 0.92rem; color: #6b635b; line-height: 1.8;
-    margin-bottom: 2rem;
+    font-size: 0.92rem; color: rgba(243, 237, 224, 0.56); line-height: 1.85;
+    margin-bottom: 2.1rem;
   }
   .metrics {
     display: grid; grid-template-columns: repeat(4, 1fr);
     gap: 1.2rem;
-    border-top: 1px solid #d9d3c7;
-    border-bottom: 1px solid #d9d3c7;
-    padding: 1.6rem 0;
-    margin-bottom: 2.2rem;
+    border-top: 1px solid rgba(243, 237, 224, 0.14);
+    border-bottom: 1px solid rgba(243, 237, 224, 0.14);
+    padding: 1.7rem 0;
+    margin-bottom: 2.3rem;
   }
   .metric .num {
     font-size: 2.1rem; font-weight: 600; line-height: 1.1;
+    color: #f6f0e3;
   }
-  .metric .num small { font-size: 0.9rem; font-weight: 400; color: #8a827c; }
-  .metric .lbl { font-size: 0.8rem; color: #6b635b; margin-top: 0.4rem; }
+  .metric .num small { font-size: 0.9rem; font-weight: 400; color: var(--muted); }
+  .metric .lbl { font-size: 0.8rem; color: rgba(243, 237, 224, 0.56); margin-top: 0.4rem; }
   .metric .calc {
-    font-size: 0.72rem; color: #a39a8f; margin-top: 0.15rem;
+    font-size: 0.72rem; color: var(--faint); margin-top: 0.2rem;
     font-family: 'Switzer', sans-serif;
   }
-  .r-block { margin-bottom: 2rem; }
+  .r-block { margin-bottom: 2.1rem; }
   .r-h {
-    font-size: 0.78rem; color: var(--green);
-    letter-spacing: 0.1em; margin-bottom: 0.9rem;
+    font-size: 0.76rem; color: var(--green);
+    letter-spacing: 0.16em; margin-bottom: 1rem;
     font-family: 'Switzer', sans-serif; font-weight: 600;
   }
-  .bars { display: grid; gap: 0.75rem; }
+  .bars { display: grid; gap: 0.8rem; }
   .bar-row { display: grid; grid-template-columns: 6.5em 1fr 4.5em; align-items: center; gap: 0.9rem; }
-  .bar-row .bl { font-size: 0.85rem; color: #4b443e; }
-  .bar-track { height: 8px; background: #ece7dc; border-radius: 4px; overflow: hidden; }
-  .bar-fill { height: 100%; background: #2f2b26; border-radius: 4px; }
+  .bar-row .bl { font-size: 0.85rem; color: rgba(243, 237, 224, 0.72); }
+  .bar-track { height: 8px; background: rgba(243, 237, 224, 0.1); border-radius: 4px; overflow: hidden; }
+  .bar-fill { height: 100%; background: #e9e1cf; border-radius: 4px; }
   .bar-fill.light { background: var(--green); }
-  .bar-row .bv { font-size: 0.8rem; color: #6b635b; text-align: right; font-family: 'Switzer', sans-serif; }
-  .findings { display: grid; gap: 0.85rem; }
-  .finding { display: flex; gap: 0.9rem; font-size: 0.92rem; line-height: 1.75; color: #3f3a34; }
-  .finding b { font-weight: 600; flex-shrink: 0; }
+  .bar-row .bv { font-size: 0.8rem; color: var(--muted); text-align: right; font-family: 'Switzer', sans-serif; }
+  .findings { display: grid; gap: 0.9rem; }
+  .finding { display: flex; gap: 0.9rem; font-size: 0.92rem; line-height: 1.8; color: rgba(243, 237, 224, 0.78); }
+  .finding b { font-weight: 600; flex-shrink: 0; color: #f3ede0; }
   .finding i { font-style: normal; color: var(--green); font-family: 'Switzer', sans-serif; font-size: 0.78rem; font-weight: 600; padding-top: 0.32rem; min-width: 1.2em; }
   .r-quote {
-    border-left: 3px solid var(--green);
-    background: var(--green-lt);
-    padding: 1.1rem 1.4rem;
-    font-size: 1rem; line-height: 1.8; color: #3a4634;
+    border-left: 2px solid var(--green);
+    background: rgba(150, 190, 130, 0.08);
+    padding: 1.2rem 1.5rem;
+    font-size: 1rem; line-height: 1.85; color: #d9e4cd;
   }
   .r-note {
-    font-size: 0.78rem; color: #8a827c; line-height: 1.7;
-    margin-top: 2rem; padding-top: 1.2rem;
-    border-top: 1px solid #e7e2d7;
+    font-size: 0.78rem; color: var(--faint); line-height: 1.75;
+    margin-top: 2.1rem; padding-top: 1.3rem;
+    border-top: 1px solid rgba(243, 237, 224, 0.1);
     font-family: 'Switzer', sans-serif;
   }
 
-  /* ═══════════ WALK ═══════════ */
-  .walk-card {
-    background: var(--lavender-lt);
-    border: 1px solid #e4dff0;
-    border-radius: var(--radius);
-    padding: 2.8rem;
-    text-align: center;
+  /* ═══════════ REPORT PREVIEW ═══════════ */
+  .report-mini {
+    display: block; width: 100%;
+    font: inherit; color: inherit; text-align: left;
+    cursor: zoom-in;
+    background: linear-gradient(165deg, rgba(24, 24, 29, 0.9), rgba(9, 9, 11, 0.94));
+    border: 1px solid rgba(243, 237, 224, 0.12);
+    border-radius: 1.6rem 3.4rem 2rem 2.8rem / 3rem 1.8rem 3.4rem 1.6rem;
+    padding: 2rem 2.1rem 1.8rem;
+    font-family: 'Noto Serif SC', 'Songti SC', serif;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.45);
+    transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1), border-color 0.5s, box-shadow 0.5s;
   }
-  .walk-card h2 { font-size: 1.6rem; font-weight: 600; margin-bottom: 0.7rem; }
-  .walk-card .wsub {
-    color: var(--muted); font-size: 0.95rem;
-    max-width: 34em; margin: 0 auto 1.8rem;
+  .report-mini:hover {
+    transform: translateY(-4px);
+    border-color: rgba(195, 180, 228, 0.32);
+    box-shadow: 0 34px 80px rgba(0, 0, 0, 0.55);
   }
-  .walk-links { display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; }
-  .walk-btn {
-    text-decoration: none; color: var(--text);
-    background: var(--white);
-    border: var(--border);
-    border-radius: 999px;
-    padding: 0.55rem 1.4rem;
-    font-size: 0.88rem; font-weight: 500;
-    transition: all 0.18s;
+  .rm-kicker {
+    display: block; font-family: 'Switzer', sans-serif;
+    font-size: 0.68rem; letter-spacing: 0.16em;
+    color: var(--green); text-transform: uppercase; margin-bottom: 1rem;
   }
-  .walk-btn:hover { border-color: var(--lavender); color: var(--lavender); }
+  .rm-title {
+    display: block; font-size: 1.32rem; font-weight: 600;
+    line-height: 1.62; letter-spacing: -0.01em; color: #f6f0e3;
+  }
+  .rm-metrics {
+    display: flex; flex-wrap: wrap; gap: 1rem 1.7rem;
+    margin-top: 1.4rem; padding-top: 1.1rem;
+    border-top: 1px solid rgba(243, 237, 224, 0.12);
+    font-family: 'Switzer', sans-serif;
+  }
+  .rm-metric b { display: block; font-size: 1.12rem; font-weight: 600; color: #f3ede0; }
+  .rm-metric span { display: block; font-size: 0.68rem; color: var(--faint); letter-spacing: 0.05em; margin-top: 0.15rem; }
+  .rm-hint {
+    display: block; margin-top: 1.3rem;
+    font-size: 0.78rem; letter-spacing: 0.06em; color: var(--lavender);
+  }
+
+  /* ═══════════ REPORT MODAL ═══════════ */
+  .report-modal {
+    position: fixed; inset: 0; z-index: 90;
+    display: flex; align-items: center; justify-content: center;
+    padding: 4vh 3vw;
+    opacity: 0; visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+  }
+  .report-modal.open { opacity: 1; visibility: visible; }
+  .rm-backdrop {
+    position: absolute; inset: 0;
+    background: rgba(4, 5, 7, 0.8);
+    -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px);
+  }
+  .report-modal .report {
+    position: relative;
+    width: 100%; max-width: 920px; max-height: 88vh;
+    overflow-y: auto; overscroll-behavior: contain;
+    background: linear-gradient(168deg, rgba(23, 23, 28, 0.99), rgba(9, 9, 11, 1));
+    box-shadow: 0 60px 140px rgba(0, 0, 0, 0.8);
+    transform: translateY(18px) scale(0.985);
+    transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .report-modal.open .report { transform: none; }
+  .rm-close {
+    position: absolute; top: max(2.2vh, 14px); right: max(2.2vw, 14px); z-index: 2;
+    width: 2.6rem; height: 2.6rem; display: grid; place-items: center;
+    border-radius: 50%; cursor: pointer;
+    background: rgba(243, 237, 224, 0.07);
+    border: 1px solid rgba(243, 237, 224, 0.2);
+    color: var(--text);
+    transition: background 0.2s, border-color 0.2s, transform 0.3s;
+  }
+  .rm-close:hover { background: rgba(243, 237, 224, 0.14); border-color: rgba(243, 237, 224, 0.36); transform: rotate(90deg); }
+  .rm-close svg { width: 1rem; height: 1rem; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+
+  /* ═══════════ WECHAT QR MODAL ═══════════ */
+  .qr-modal {
+    position: fixed; inset: 0; z-index: 95;
+    display: flex; align-items: center; justify-content: center;
+    padding: 5vh 4vw;
+    opacity: 0; visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+  }
+  .qr-modal.open { opacity: 1; visibility: visible; }
+  .qr-card {
+    position: relative;
+    width: min(420px, 88vw);
+    background: #fff;
+    border-radius: 1.5rem;
+    padding: 0.9rem 0.9rem 0.4rem;
+    box-shadow: 0 50px 120px rgba(0, 0, 0, 0.75);
+    transform: translateY(16px) scale(0.97);
+    transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .qr-modal.open .qr-card { transform: none; }
+  .qr-card img { display: block; width: 100%; height: auto; border-radius: 0.9rem; }
 
   footer {
-    padding: 5rem 0 3rem;
+    padding: 6rem 0 4rem;
     text-align: center;
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     color: var(--faint);
-    letter-spacing: 0.06em;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
   }
 
   @media (max-width: 720px) {
@@ -281,26 +347,107 @@
     section { padding-top: 6rem; }
     .hero-inner { flex-direction: column; gap: 1.6rem; }
     .hero-en { font-size: 1.9rem; }
+    .film video { border-radius: 1.1rem 0.6rem 1rem 0.7rem / 0.7rem 1rem 0.6rem 1.1rem; }
     .metrics { grid-template-columns: repeat(2, 1fr); gap: 1.4rem; }
     .report { padding: 1.6rem 1.3rem 1.4rem; }
     .report h3 { font-size: 1.34rem; }
+    .report-mini { padding: 1.5rem 1.4rem 1.4rem; }
+    .rm-title { font-size: 1.12rem; }
+    .report-modal { padding: 2vh 2vw; }
+    .report-modal .report { max-height: 92vh; }
+    .rm-close { top: 12px; right: 12px; width: 2.3rem; height: 2.3rem; }
     .bar-row { grid-template-columns: 5em 1fr 3.6em; }
   }
+
+  /* ═══════════ NIGHT HERO ═══════════ */
+  #night { --u: min(calc(100vw/1600), calc(100vh/900)); position: relative; z-index: 1; height: 100vh; min-height: 620px; background: #000; overflow: hidden; }
+  #valley { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+  #valley canvas { display: block; width: 100% !important; height: 100% !important; }
+  .ui { position: absolute; inset: 0; z-index: 2; pointer-events: none; opacity: 0; transition: opacity 1.6s ease; color: #f5efe2; }
+  .ui.on { opacity: 1; }
+  .ui a, .ui button { pointer-events: auto; }
+  .ui button { background: none; border: 0; padding: 0; cursor: pointer; color: inherit; }
+  .hero-night { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-46%); display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .hero-night::before { content: ""; position: absolute; left: 50%; top: 50%; width: min(1200px, 120vw); height: 150%; transform: translate(-50%, -50%); background: radial-gradient(50% 50% at 50% 50%, rgba(0,0,0,.6), rgba(0,0,0,.26) 55%, transparent 75%); pointer-events: none; z-index: -1; }
+  .hero-night h1 { font-family: 'Antonio', 'Arial Narrow', sans-serif; font-size: min(calc(158*var(--u)), 7.1vw); line-height: .95; letter-spacing: -.018em; white-space: nowrap; color: #f5efe2; font-weight: 400; }
+  .hero-night .cap { margin-top: calc(48*var(--u)); font-size: calc(20*var(--u)); line-height: 1.3; color: #f5efe2; text-shadow: 0 1px 18px rgba(0,0,0,.85); }
+  .go { display: grid; place-items: center; margin-top: calc(34*var(--u)); width: calc(58*var(--u)); height: calc(58*var(--u)); border: 1.5px solid #f5efe2; border-radius: 50%; transition: background .3s, color .3s; color: #f5efe2; }
+  .go:hover { background: #f5efe2; color: #151510; }
+  .go svg { width: calc(22*var(--u)); height: calc(22*var(--u)); fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  .corner { position: absolute; right: calc(44*var(--u)); bottom: calc(44*var(--u)); display: flex; align-items: center; gap: calc(18*var(--u)); font-size: calc(12.5*var(--u)); font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: #f5efe2; text-shadow: 0 1px 14px rgba(0,0,0,.55); }
+  .corner i { width: 1px; height: calc(26*var(--u)); background: rgba(245,239,226,.45); }
+  .sound { display: grid; place-items: center; width: calc(28*var(--u)); height: calc(28*var(--u)); color: #f5efe2; }
+  .sound svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .sound .w { transition: opacity .3s; } .sound[aria-pressed=false] .w { opacity: 0; } .sound[aria-pressed=true] .x { opacity: 0; }
+  #night::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 24vh; background: linear-gradient(180deg, rgba(6,7,9,0) 0%, rgba(6,7,9,.35) 55%, rgba(6,7,9,.8) 85%, #060709 100%); z-index: 1; pointer-events: none; }
+
+  /* the hero arrives slowly, once */
+  @keyframes heroIn {
+    from { opacity: 0; transform: translateY(34px); filter: blur(12px); }
+    to   { opacity: 1; transform: translateY(0);    filter: blur(0); }
+  }
+  @keyframes softIn { from { opacity: 0 } to { opacity: 1 } }
+  .ui.on .hero-night h1 { animation: heroIn 3.4s cubic-bezier(0.16, 0.84, 0.24, 1) 0.15s both; }
+  .ui.on .hero-night .cap { animation: heroIn 2.6s cubic-bezier(0.16, 0.84, 0.24, 1) 1.15s both; }
+  .ui.on .hero-night .go { animation: heroIn 2.2s cubic-bezier(0.16, 0.84, 0.24, 1) 1.85s both; }
+  .ui.on .corner { animation: softIn 2.6s ease 2.5s both; }
+
+  .loader { position: fixed; inset: 0; z-index: 80; display: grid; place-items: center; background: #000; transition: opacity 1.2s ease; pointer-events: none; }
+  .loader.gone { opacity: 0; }
+  .loader span { width: 9px; height: 9px; border-radius: 50%; background: #f5efe2; animation: pulse 1.2s ease-in-out infinite; }
+  @keyframes pulse { 50% { transform: scale(.4); opacity: .4; } }
+
+  .topbar { position: fixed; top: 0; left: 0; right: 0; z-index: 60; color: #f5efe2; border-bottom: 1px solid transparent; transition: background .5s ease, border-color .5s ease; }
+  .topbar .bar { max-width: 1080px; margin: 0 auto; padding: 0 3rem; height: 66px; display: flex; align-items: center; gap: 2.2rem; }
+  .topbar .logo { font-family: 'Antonio', 'Arial Narrow', sans-serif; font-size: 18px; letter-spacing: .16em; color: inherit; text-decoration: none; white-space: nowrap; }
+  .topbar .links { display: flex; gap: 1.9rem; margin-left: auto; font-size: 13px; letter-spacing: .05em; }
+  .topbar .links a { color: inherit; opacity: .68; text-decoration: none; transition: opacity .25s; }
+  .topbar .links a:hover { opacity: 1; }
+  .topbar .pill { font: inherit; font-size: 12.5px; letter-spacing: .06em; padding: .5rem 1.15rem; border: 0; cursor: pointer; border-radius: 999px; background: #f5efe2; color: #0a0a0c; text-decoration: none; white-space: nowrap; transition: background .3s, color .3s; }
+  .topbar.solid { background: rgba(6, 7, 9, 0.62); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); border-bottom-color: rgba(243, 237, 224, 0.08); }
+  .topbar.solid .pill { background: #f5efe2; color: #0a0a0c; }
+
+  @media (max-width: 820px) {
+    #night { --u: 1px; }
+    .hero-night h1 { font-size: clamp(26px, 9.1vw, 64px); white-space: nowrap; }
+    .hero-night .cap { font-size: 17px; }
+    .go { width: 54px; height: 54px; }
+    .go svg { width: 20px; height: 20px; }
+    .corner { right: 20px; bottom: 26px; font-size: 11px; }
+    .topbar .bar { padding: 0 1.4rem; height: 58px; }
+    .topbar .links { display: none; }
+  }
+
 </style>
 </head>
 <body>
 
-<div class="wrap">
+<canvas id="meadow" aria-hidden="true"></canvas>
 
-  <nav>
-    <div class="inner">
-      <a href="#about">about</a>
-      <a href="#build">build</a>
-      <a href="#videos">videos</a>
-      <a href="#report">report</a>
-      <a href="#walk">walk together</a>
+<div id="night">
+  <div id="valley" aria-hidden="true"></div>
+  <div class="ui" id="ui">
+    <div class="hero-night">
+      <h1>Something is growing here.</h1>
+      <p class="cap">Slowly. In public. Here.</p>
+      <a class="go" href="#build" id="go" aria-label="Enter the site"><svg viewBox="0 0 24 24"><path d="M12 4v16M6 14l6 6 6-6"/></svg></a>
     </div>
-  </nav>
+    <div class="corner"><span>Scroll to wander</span><i></i>
+      <button class="sound" id="sound" aria-pressed="false" aria-label="Ambient sound"><svg viewBox="0 0 24 24"><path d="M4 9.5v5h3.5L12 18V6L7.5 9.5Z"/><path class="w" d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/><path class="x" d="m16 10 4 4m0-4-4 4"/></svg></button>
+    </div>
+  </div>
+</div>
+<div class="loader" id="loader"><span></span></div>
+<header class="topbar" id="topbar">
+  <div class="bar">
+    <a class="logo" href="#night">GAO XINYI</a>
+    <nav class="links" aria-label="Main">
+      <a href="#build">project</a>
+    </nav>
+    <button class="pill" type="button" id="sayHi">say hi</button>
+  </div>
+</header>
+<div class="wrap">
 
   <!-- ═══════ HERO ═══════ -->
   <section class="hero">
@@ -314,191 +461,176 @@
     </div>
   </section>
 
-  <!-- ═══════ ABOUT ═══════ -->
-  <section id="about">
-    <div class="sec-label">
-      <span class="sec-num">01</span>
-      <span class="sec-name">About</span>
-    </div>
-    <p class="about-statement">我在南京大学研究社会心理学，目前在百度 AI 搜索业务做 PM intern。最近在做两件事：把知识视频从脚本到成片的整条生产线工具化；帮品牌看清自己在 AI 回答里被怎样对待。Learn in public, build in public.</p>
-  </section>
-
-  <!-- ═══════ BUILD ═══════ -->
+  <!-- ═══════ WORK ═══════ -->
   <section id="build">
     <div class="sec-label">
-      <span class="sec-num">02</span>
-      <span class="sec-name">Build</span>
+      <span class="sec-num">01</span>
+      <span class="sec-name">Project</span>
     </div>
 
-    <div class="build-group">
-      <p class="build-group-label">现在进行中</p>
-      <div class="build-cards">
-        <a class="proj" href="#videos">
-          <div class="p-top">
-            <span class="p-status">active</span>
-            <span class="p-date">2026.11</span>
-          </div>
-          <h3>知识视频生产线</h3>
-          <p class="p-desc">从口播脚本到成片的一条线：网页分镜、克隆音色配音、标签页录制、一条命令自动裁切、掐头去尾、按章切条。本页的视频就是它做的。</p>
-          <div class="p-bar"><div class="p-bar-inner" style="width:85%;background:var(--green);"></div></div>
-          <p class="p-tags">TypeScript · Vite · Qwen3-TTS · ffmpeg</p>
-        </a>
-        <a class="proj" href="#report">
-          <div class="p-top">
-            <span class="p-status">active</span>
-            <span class="p-date">2026.11</span>
-          </div>
-          <h3>GEO 检测系统</h3>
-          <p class="p-desc">单机 GEO 运营系统。用真实提问采集 DeepSeek、豆包、元宝、千问、百度的回答，计算提及率、首选率、声量份额与信源归因，产出顾问式报告。</p>
-          <div class="p-bar"><div class="p-bar-inner" style="width:75%;background:var(--green);"></div></div>
-          <p class="p-tags">Node · SQLite · Playwright CDP · 报告自动化</p>
-        </a>
-      </div>
-    </div>
-
-    <div class="build-group">
-      <p class="build-group-label">可参观</p>
-      <div class="build-cards">
-        <a class="proj" href="#videos">
-          <div class="p-top">
-            <span class="p-status done">completed</span>
-          </div>
-          <h3>法律咨询 · 律径</h3>
-          <p class="p-desc">法律咨询问答 + 可解释的法律检索工作流。回答逐条给出依据法条与出处，检索路径在右栏同步展开，让「为什么这么答」可见。</p>
-          <div class="p-bar"><div class="p-bar-inner" style="width:100%;background:var(--green);"></div></div>
-          <p class="p-tags">法律咨询 · 检索工作流 · RAG</p>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════ VIDEOS ═══════ -->
-  <section id="videos">
-    <div class="sec-label">
-      <span class="sec-num">03</span>
-      <span class="sec-name">Videos</span>
-    </div>
-    <p class="videos-sub">把想法讲成片子。</p>
-
-    <div class="film">
-      <div class="film-head">
-        <h3>后训练：为什么模型需要被教才好用</h3>
-        <span class="film-meta">92 秒 · 3 章 16 个分镜 · 自动配音与剪辑</span>
-      </div>
-      <video id="player" controls preload="metadata" playsinline poster="assets/video/poster-demo.jpg">
-        <source src="assets/video/demo-1080p.mp4" type="video/mp4">
-      </video>
-      <div class="chips" id="chapters">
-        <button class="chip" aria-pressed="true" data-src="assets/video/demo-1080p.mp4" data-poster="assets/video/poster-demo.jpg" data-title="后训练：为什么模型需要被教才好用">全片 92s</button>
-        <button class="chip" aria-pressed="false" data-src="assets/video/demo-01-why-posttrain.mp4" data-poster="assets/video/poster-demo.jpg" data-title="01 为什么需要后训练">01 为什么需要后训练 14s</button>
-        <button class="chip" aria-pressed="false" data-src="assets/video/demo-02-pipeline.mp4" data-poster="assets/video/poster-pipeline.jpg" data-title="02 八步后训练流水线">02 八步流水线 54s</button>
-        <button class="chip" aria-pressed="false" data-src="assets/video/demo-03-pitfalls.mp4" data-poster="assets/video/poster-demo.jpg" data-title="03 1% 的数据与三个坑">03 1% 的数据与三个坑 24s</button>
-      </div>
-      <p class="film-cap" id="film-cap">全片：从「聪明还是智障」讲到「以数据和反馈为中心的系统工程」。</p>
-    </div>
-
-    <div class="film">
-      <div class="film-head">
-        <h3>律径 · 法律咨询工作流</h3>
-        <span class="film-meta">69 秒 · 屏幕操作演示 · 无音轨</span>
-      </div>
-      <video controls preload="metadata" playsinline poster="assets/video/poster-legal.jpg">
-        <source src="assets/video/legal-workflow.mp4" type="video/mp4">
-      </video>
-      <p class="film-cap">左侧是法律咨询问答（未签劳动合同的双倍工资问题），右侧同步展开检索、比对与引用路径。</p>
-    </div>
-  </section>
-
-  <!-- ═══════ REPORT ═══════ -->
-  <section id="report">
-    <div class="sec-label">
-      <span class="sec-num">04</span>
-      <span class="sec-name">Report &nbsp;/&nbsp; 样例</span>
-    </div>
-
-    <div class="report">
-      <p class="report-kicker">AI Visibility Baseline · 2026</p>
-      <h3>AI 愿意把你放进候选，<br>但只有被点名时，它才想得到你。</h3>
-      <p class="report-sub">客户为南京一家高端伴手礼品牌。2026 年 11 月基线：6 个真实购买问题 × 5 个 AI 平台 = 30 条回答。以下为脱敏摘要，完整报告约 11 页。</p>
-
-      <div class="metrics">
-        <div class="metric">
-          <div class="num">36.7<small>%</small></div>
-          <div class="lbl">提及率</div>
-          <div class="calc">11 / 30 条回答</div>
+    <div class="work">
+      <a class="proj" href="#videos">
+        <div class="p-top">
+          <span class="p-status">active</span>
+          <span class="p-date">2026.11</span>
         </div>
-        <div class="metric">
-          <div class="num">16.7<small>%</small></div>
-          <div class="lbl">首选率</div>
-          <div class="calc">5 / 30 条回答</div>
-        </div>
-        <div class="metric">
-          <div class="num">11.1<small>%</small></div>
-          <div class="lbl">声量份额</div>
-          <div class="calc">11 / 总计 99 次</div>
-        </div>
-        <div class="metric">
-          <div class="num">0<small>/30</small></div>
-          <div class="lbl">自有信源召回</div>
-          <div class="calc">无一条引用官方内容</div>
+        <h3>知识视频生产线</h3>
+        <p class="p-desc">从口播脚本到成片的一条线：网页分镜、克隆音色配音、标签页录制、一条命令自动裁切、掐头去尾、按章切条。下面的片子就是它做的。</p>
+        <p class="p-tags">TypeScript · Vite · Qwen3-TTS · ffmpeg</p>
+      </a>
+      <div class="work-out films" id="videos">
+        <div class="film">
+          <div class="film-head">
+            <h3>后训练：为什么模型需要被教才好用</h3>
+            <span class="film-meta">92 秒 · 3 章 16 个分镜 · 自动配音与剪辑</span>
+          </div>
+          <video id="player" controls preload="metadata" playsinline poster="assets/video/poster-demo.jpg">
+            <source src="assets/video/demo-1080p.mp4" type="video/mp4">
+          </video>
+          <div class="chips" id="chapters">
+            <button class="chip" aria-pressed="true" data-src="assets/video/demo-1080p.mp4" data-poster="assets/video/poster-demo.jpg" data-title="后训练：为什么模型需要被教才好用">全片 92s</button>
+            <button class="chip" aria-pressed="false" data-src="assets/video/demo-01-why-posttrain.mp4" data-poster="assets/video/poster-demo.jpg" data-title="01 为什么需要后训练">01 为什么需要后训练 14s</button>
+            <button class="chip" aria-pressed="false" data-src="assets/video/demo-02-pipeline.mp4" data-poster="assets/video/poster-pipeline.jpg" data-title="02 八步后训练流水线">02 八步流水线 54s</button>
+            <button class="chip" aria-pressed="false" data-src="assets/video/demo-03-pitfalls.mp4" data-poster="assets/video/poster-demo.jpg" data-title="03 1% 的数据与三个坑">03 1% 的数据与三个坑 24s</button>
+          </div>
+          <p class="film-cap" id="film-cap">全片：从「聪明还是智障」讲到「以数据和反馈为中心的系统工程」。</p>
         </div>
       </div>
+    </div>
 
-      <div class="r-block">
-        <p class="r-h">按问题类型拆分</p>
-        <div class="bars">
-          <div class="bar-row">
-            <span class="bl">品牌题</span>
-            <div class="bar-track"><div class="bar-fill" style="width:100%;"></div></div>
-            <span class="bv">5 / 5</span>
+    <div class="work flip">
+      <a class="proj" href="#legal-film">
+        <div class="p-top">
+          <span class="p-status done">completed</span>
+          <span class="p-date">2026</span>
+        </div>
+        <h3>法律咨询 · 律径</h3>
+        <p class="p-desc">法律咨询问答 + 可解释的法律检索工作流。回答逐条给出依据法条与出处，检索路径在右栏同步展开，让「为什么这么答」可见。</p>
+        <p class="p-tags">法律咨询 · 检索工作流 · RAG</p>
+      </a>
+      <div class="work-out" id="legal-film">
+        <div class="film">
+          <div class="film-head">
+            <h3>律径 · 法律咨询工作流</h3>
+            <span class="film-meta">23 秒 · 3× 加速 · 屏幕操作演示</span>
           </div>
-          <div class="bar-row">
-            <span class="bl">对比题</span>
-            <div class="bar-track"><div class="bar-fill" style="width:100%;"></div></div>
-            <span class="bv">5 / 5</span>
-          </div>
-          <div class="bar-row">
-            <span class="bl">场景题</span>
-            <div class="bar-track"><div class="bar-fill light" style="width:5%;"></div></div>
-            <span class="bv">1 / 20</span>
-          </div>
+          <video controls preload="metadata" playsinline poster="assets/video/poster-legal.jpg">
+            <source src="assets/video/legal-workflow-3x.mp4" type="video/mp4">
+          </video>
+          <p class="film-cap">左侧是法律咨询问答（未签劳动合同的双倍工资问题），右侧同步展开检索、比对与引用路径。</p>
         </div>
       </div>
+    </div>
 
-      <div class="r-block">
-        <p class="r-h">三条判断</p>
-        <div class="findings">
-          <div class="finding"><i>i</i><span><b>归类偏差。</b>五个平台一致把品牌描述为「礼盒定制 / 高颜值伴手礼」，而不是「南京特产」，场景类问题因此不会主动调用。</span></div>
-          <div class="finding"><i>ii</i><span><b>证据缺失。</b>即使检索最勤的平台也要求「实地比对」：可检索内容几乎全部来自社交分享，没有权威第三方评测。</span></div>
-          <div class="finding"><i>iii</i><span><b>自有信源为零。</b>30 条回答没有一条引用品牌官方内容，AI 对品牌的全部认知建立在第三方转述之上。</span></div>
+    <div class="work">
+      <div class="proj">
+        <div class="p-top">
+          <span class="p-status">active</span>
+          <span class="p-date">2026.11</span>
         </div>
+        <h3>GEO 检测系统</h3>
+        <p class="p-desc">单机 GEO 运营系统。用真实提问采集 DeepSeek、豆包、元宝、千问、百度的回答，计算提及率、首选率、声量份额与信源归因，产出顾问式报告。</p>
+        <p class="p-tags">Node · SQLite · Playwright CDP · 报告自动化</p>
       </div>
-
-      <div class="r-quote">问题不在平台投放预算，而在信源质量与归类：检索已经发生，却没有转化为推荐。</div>
-
-      <p class="r-note">样例已做脱敏：品牌名、门店影像与原始问答全文不在公开页面中。报告结构：执行摘要 · 问题面板 · 平台视图 · 命中矩阵 · 竞品格局 · 信源证据 · 行动建议 · 方法与局限。</p>
-    </div>
-  </section>
-
-  <!-- ═══════ WALK ═══════ -->
-  <section id="walk">
-    <div class="sec-label">
-      <span class="sec-num">05</span>
-      <span class="sec-name">Walk Together &nbsp;/&nbsp; 同行</span>
-    </div>
-    <div class="walk-card">
-      <h2>我们在路上见。</h2>
-      <p class="wsub">如果你也对创造用户价值、创造有意思的、独特的、有用而美的东西感兴趣，可以在这里找到我。</p>
-      <div class="walk-links">
-        <a class="walk-btn" href="https://xhslink.com/m/1gRZWl4BUvl" target="_blank" rel="noopener">小红书</a>
-        <a class="walk-btn" href="https://github.com/J-ade-g" target="_blank" rel="noopener">GitHub</a>
-        <a class="walk-btn" href="mailto:3261936960@qq.com">Email</a>
+      <div class="work-out">
+        <button class="report-mini" type="button" data-open-report aria-label="查看 GEO 样例报告">
+          <span class="rm-kicker">AI Visibility Baseline · 2026 · 样例</span>
+          <span class="rm-title">AI 愿意把你放进候选，<br>但只有被点名时，它才想得到你。</span>
+          <span class="rm-metrics">
+            <span class="rm-metric"><b>36.7%</b><span>提及率</span></span>
+            <span class="rm-metric"><b>16.7%</b><span>首选率</span></span>
+            <span class="rm-metric"><b>11.1%</b><span>声量份额</span></span>
+            <span class="rm-metric"><b>0/30</b><span>自有信源</span></span>
+          </span>
+          <span class="rm-hint">点击放大 →</span>
+        </button>
       </div>
     </div>
   </section>
 
   <footer>© 2026 Gao Xinyi</footer>
 
+</div>
+
+<!-- ═══════ REPORT MODAL ═══════ -->
+<div class="report-modal" id="reportModal" aria-hidden="true">
+  <div class="rm-backdrop" data-close-report></div>
+  <button class="rm-close" type="button" data-close-report aria-label="关闭样例报告">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <div class="report" role="dialog" aria-modal="true" aria-labelledby="reportTitle">
+    <p class="report-kicker">AI Visibility Baseline · 2026</p>
+    <h3 id="reportTitle">AI 愿意把你放进候选，<br>但只有被点名时，它才想得到你。</h3>
+    <p class="report-sub">客户为南京一家高端伴手礼品牌。2026 年 11 月基线：6 个真实购买问题 × 5 个 AI 平台 = 30 条回答。以下为脱敏摘要，完整报告约 11 页。</p>
+
+    <div class="metrics">
+      <div class="metric">
+        <div class="num">36.7<small>%</small></div>
+        <div class="lbl">提及率</div>
+        <div class="calc">11 / 30 条回答</div>
+      </div>
+      <div class="metric">
+        <div class="num">16.7<small>%</small></div>
+        <div class="lbl">首选率</div>
+        <div class="calc">5 / 30 条回答</div>
+      </div>
+      <div class="metric">
+        <div class="num">11.1<small>%</small></div>
+        <div class="lbl">声量份额</div>
+        <div class="calc">11 / 总计 99 次</div>
+      </div>
+      <div class="metric">
+        <div class="num">0<small>/30</small></div>
+        <div class="lbl">自有信源召回</div>
+        <div class="calc">无一条引用官方内容</div>
+      </div>
+    </div>
+
+    <div class="r-block">
+      <p class="r-h">按问题类型拆分</p>
+      <div class="bars">
+        <div class="bar-row">
+          <span class="bl">品牌题</span>
+          <div class="bar-track"><div class="bar-fill" style="width:100%;"></div></div>
+          <span class="bv">5 / 5</span>
+        </div>
+        <div class="bar-row">
+          <span class="bl">对比题</span>
+          <div class="bar-track"><div class="bar-fill" style="width:100%;"></div></div>
+          <span class="bv">5 / 5</span>
+        </div>
+        <div class="bar-row">
+          <span class="bl">场景题</span>
+          <div class="bar-track"><div class="bar-fill light" style="width:5%;"></div></div>
+          <span class="bv">1 / 20</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="r-block">
+      <p class="r-h">三条判断</p>
+      <div class="findings">
+        <div class="finding"><i>i</i><span><b>归类偏差。</b>五个平台一致把品牌描述为「礼盒定制 / 高颜值伴手礼」，而不是「南京特产」，场景类问题因此不会主动调用。</span></div>
+        <div class="finding"><i>ii</i><span><b>证据缺失。</b>即使检索最勤的平台也要求「实地比对」：可检索内容几乎全部来自社交分享，没有权威第三方评测。</span></div>
+        <div class="finding"><i>iii</i><span><b>自有信源为零。</b>30 条回答没有一条引用品牌官方内容，AI 对品牌的全部认知建立在第三方转述之上。</span></div>
+      </div>
+    </div>
+
+    <div class="r-quote">问题不在平台投放预算，而在信源质量与归类：检索已经发生，却没有转化为推荐。</div>
+
+    <p class="r-note">样例已做脱敏：品牌名、门店影像与原始问答全文不在公开页面中。报告结构：执行摘要 · 问题面板 · 平台视图 · 命中矩阵 · 竞品格局 · 信源证据 · 行动建议 · 方法与局限。</p>
+  </div>
+</div>
+
+<!-- ═══════ WECHAT QR MODAL ═══════ -->
+<div class="qr-modal" id="qrModal" aria-hidden="true">
+  <div class="rm-backdrop" data-close-qr></div>
+  <button class="rm-close" type="button" data-close-qr aria-label="关闭微信二维码">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <div class="qr-card" role="dialog" aria-modal="true" aria-label="微信二维码">
+    <img src="assets/wechat-qr.png" alt="凉拌海浪的微信二维码">
+  </div>
 </div>
 
 <script>
@@ -521,6 +653,79 @@
       player.play().catch(() => {});
     });
   });
+
+  /* report sample opens as an enlarged overlay */
+  const reportModal = document.getElementById("reportModal");
+  if (reportModal) {
+    const closeBtn = reportModal.querySelector(".rm-close");
+    let lastFocus = null;
+    const openReport = (e) => {
+      e.preventDefault();
+      lastFocus = document.activeElement;
+      reportModal.classList.add("open");
+      reportModal.setAttribute("aria-hidden", "false");
+      document.documentElement.style.overflow = "hidden";
+      closeBtn.focus();
+    };
+    const closeReport = () => {
+      reportModal.classList.remove("open");
+      reportModal.setAttribute("aria-hidden", "true");
+      document.documentElement.style.overflow = "";
+      if (lastFocus) lastFocus.focus();
+    };
+    document.querySelectorAll("[data-open-report]").forEach((el) => el.addEventListener("click", openReport));
+    reportModal.querySelectorAll("[data-close-report]").forEach((el) => el.addEventListener("click", closeReport));
+    addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && reportModal.classList.contains("open")) closeReport();
+    });
+  }
+
+  /* say hi opens the WeChat QR card */
+  const qrModal = document.getElementById("qrModal");
+  const sayHi = document.getElementById("sayHi");
+  if (qrModal && sayHi) {
+    let qrFocus = null;
+    const openQr = () => {
+      qrFocus = document.activeElement;
+      qrModal.classList.add("open");
+      qrModal.setAttribute("aria-hidden", "false");
+      document.documentElement.style.overflow = "hidden";
+      qrModal.querySelector(".rm-close").focus();
+    };
+    const closeQr = () => {
+      qrModal.classList.remove("open");
+      qrModal.setAttribute("aria-hidden", "true");
+      document.documentElement.style.overflow = "";
+      if (qrFocus) qrFocus.focus();
+    };
+    sayHi.addEventListener("click", openQr);
+    qrModal.querySelectorAll("[data-close-qr]").forEach((el) => el.addEventListener("click", closeQr));
+    addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && qrModal.classList.contains("open")) closeQr();
+    });
+  }
+
+  /* the header picks up a dark glass backdrop once the valley starts to move */
+  const topbar = document.getElementById("topbar");
+  let ticking = false;
+  function syncScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      ticking = false;
+      topbar.classList.toggle("solid", scrollY > 40);
+    });
+  }
+  addEventListener("scroll", syncScroll, { passive: true });
+  syncScroll();
 </script>
+<script type="importmap">
+{"imports":{
+  "three":"./assets/vendor/three/build/three.module.js",
+  "three/addons/":"./assets/vendor/three/examples/jsm/"
+}}
+</script>
+<script src="meadow.js" defer></script>
+<script type="module" src="valley-scene.js"></script>
 </body>
 </html>
