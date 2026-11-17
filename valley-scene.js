@@ -415,7 +415,7 @@ function chime(t) {
   if (pan.pan) pan.pan.value = Math.random() * 1.6 - 0.8;
   pan.connect(damp);
 
-  [[1, 0.06, 3.4], [2.76, 0.014, 1.6]].forEach(([ratio, peak, tail]) => {
+  [[1, 0.1, 3.6], [2.76, 0.022, 1.8]].forEach(([ratio, peak, tail]) => {
     const o = actx.createOscillator(); o.type = "sine"; o.frequency.value = f * ratio;
     const g = actx.createGain();
     g.gain.setValueAtTime(0.0001, t);
@@ -453,7 +453,7 @@ function initAudio() {
     o.type = i < 2 ? "sine" : "triangle";
     o.frequency.value = f;
     o.detune.value = Math.random() * 8 - 4;
-    const g = actx.createGain(); g.gain.value = 0.045 / (i * 0.7 + 1);
+    const g = actx.createGain(); g.gain.value = 0.065 / (i * 0.7 + 1);
     const lfo = actx.createOscillator(); lfo.frequency.value = 0.045 + i * 0.019;
     const lg = actx.createGain(); lg.gain.value = g.gain.value * 0.55;
     lfo.connect(lg).connect(g.gain); lfo.start();
@@ -464,7 +464,7 @@ function initAudio() {
   audioReady = true;
 }
 
-const TARGET_VOL = 0.85;
+const TARGET_VOL = 1;
 let started = false;
 
 function unmute() {
@@ -487,7 +487,7 @@ if (actx.state === "running") unmute();
 else actx.resume().then(() => { if (actx.state === "running" && !started) unmute(); }).catch(() => {});
 
 // browsers hold audio until a gesture; start on the first one, except on the toggle itself
-["pointerdown", "pointerup", "touchend", "click", "keydown", "wheel"].forEach((ev) => {
+["pointerdown", "pointerup", "touchend", "touchstart", "click", "keydown", "wheel", "scroll"].forEach((ev) => {
   addEventListener(ev, (e) => {
     if (e.target && e.target.closest && e.target.closest("#sound")) return;
     wake();
