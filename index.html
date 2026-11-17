@@ -163,142 +163,96 @@
   .chip[aria-pressed="true"] {
     background: var(--text); color: #0a0a0c; border-color: var(--text);
   }
-  /* ═══════════ REPORT ═══════════ */
-  .report {
-    background: linear-gradient(168deg, rgba(24, 24, 29, 0.9), rgba(9, 9, 11, 0.94));
+  /* ═══════════ REPORT (inline scroll) ═══════════ */
+  .report-view { position: relative; }
+  .report-view::after {
+    content: ''; position: absolute; left: 1px; right: 1px; bottom: 1px; height: 70px;
+    border-radius: 0 0 1rem 1rem;
+    background: linear-gradient(180deg, rgba(6, 7, 9, 0), rgba(6, 7, 9, 0.88));
+    pointer-events: none;
+  }
+  .report-scroll {
+    height: clamp(440px, 42vw, 640px);
+    overflow-y: auto;
+    padding: 1.9rem 2rem 3rem;
     border: 1px solid rgba(243, 237, 224, 0.1);
-    border-radius: 2.8rem 1.2rem 2.4rem 1.6rem / 1.6rem 2.4rem 1.2rem 2.8rem;
-    padding: 2.8rem 3rem 2.4rem;
+    border-radius: 1rem;
+    background: linear-gradient(180deg, rgba(20, 20, 25, 0.62), rgba(9, 9, 11, 0.78));
     font-family: 'Noto Serif SC', 'Songti SC', serif;
-    box-shadow: 0 40px 90px rgba(0, 0, 0, 0.45);
+    color: rgba(243, 237, 224, 0.76);
+    outline: none;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(243, 237, 224, 0.2) transparent;
   }
-  .report-kicker {
-    font-size: 0.72rem; letter-spacing: 0.16em;
-    color: var(--green); margin-bottom: 1.1rem;
-    font-family: 'Switzer', sans-serif;
-    text-transform: uppercase;
-  }
-  .report h3 {
-    font-size: 1.78rem; font-weight: 700;
-    line-height: 1.5; margin-bottom: 0.9rem;
-    color: #f6f0e3;
-  }
-  .report-sub {
-    font-size: 0.92rem; color: rgba(243, 237, 224, 0.56); line-height: 1.85;
-    margin-bottom: 2.1rem;
-  }
-  .metrics {
-    display: grid; grid-template-columns: repeat(4, 1fr);
-    gap: 1.2rem;
-    border-top: 1px solid rgba(243, 237, 224, 0.14);
-    border-bottom: 1px solid rgba(243, 237, 224, 0.14);
-    padding: 1.7rem 0;
-    margin-bottom: 2.3rem;
-  }
-  .metric .num {
-    font-size: 2.1rem; font-weight: 600; line-height: 1.1;
-    color: #f6f0e3;
-  }
-  .metric .num small { font-size: 0.9rem; font-weight: 400; color: var(--muted); }
-  .metric .lbl { font-size: 0.8rem; color: rgba(243, 237, 224, 0.56); margin-top: 0.4rem; }
-  .metric .calc {
-    font-size: 0.72rem; color: var(--faint); margin-top: 0.2rem;
-    font-family: 'Switzer', sans-serif;
-  }
-  .r-block { margin-bottom: 2.1rem; }
-  .r-h {
-    font-size: 0.76rem; color: var(--green);
-    letter-spacing: 0.16em; margin-bottom: 1rem;
-    font-family: 'Switzer', sans-serif; font-weight: 600;
-  }
-  .bars { display: grid; gap: 0.8rem; }
-  .bar-row { display: grid; grid-template-columns: 6.5em 1fr 4.5em; align-items: center; gap: 0.9rem; }
-  .bar-row .bl { font-size: 0.85rem; color: rgba(243, 237, 224, 0.72); }
-  .bar-track { height: 8px; background: rgba(243, 237, 224, 0.1); border-radius: 4px; overflow: hidden; }
-  .bar-fill { height: 100%; background: #e9e1cf; border-radius: 4px; }
-  .bar-fill.light { background: var(--green); }
-  .bar-row .bv { font-size: 0.8rem; color: var(--muted); text-align: right; font-family: 'Switzer', sans-serif; }
-  .findings { display: grid; gap: 0.9rem; }
-  .finding { display: flex; gap: 0.9rem; font-size: 0.92rem; line-height: 1.8; color: rgba(243, 237, 224, 0.78); }
-  .finding b { font-weight: 600; flex-shrink: 0; color: #f3ede0; }
-  .finding i { font-style: normal; color: var(--green); font-family: 'Switzer', sans-serif; font-size: 0.78rem; font-weight: 600; padding-top: 0.32rem; min-width: 1.2em; }
-  .r-quote {
-    border-left: 2px solid var(--green);
-    background: rgba(150, 190, 130, 0.08);
-    padding: 1.2rem 1.5rem;
-    font-size: 1rem; line-height: 1.85; color: #d9e4cd;
-  }
-  .r-note {
-    font-size: 0.78rem; color: var(--faint); line-height: 1.75;
-    margin-top: 2.1rem; padding-top: 1.3rem;
-    border-top: 1px solid rgba(243, 237, 224, 0.1);
-    font-family: 'Switzer', sans-serif;
-  }
+  .report-scroll:focus-visible { border-color: rgba(195, 180, 228, 0.36); }
+  .report-scroll::-webkit-scrollbar { width: 6px; }
+  .report-scroll::-webkit-scrollbar-thumb { background: rgba(243, 237, 224, 0.18); border-radius: 3px; }
 
-  /* ═══════════ REPORT PREVIEW ═══════════ */
-  .report-mini {
-    display: block; width: 100%;
-    font: inherit; color: inherit; text-align: left;
-    cursor: zoom-in;
-    background: linear-gradient(165deg, rgba(24, 24, 29, 0.9), rgba(9, 9, 11, 0.94));
-    border: 1px solid rgba(243, 237, 224, 0.12);
-    border-radius: 1.6rem 3.4rem 2rem 2.8rem / 3rem 1.8rem 3.4rem 1.6rem;
-    padding: 2rem 2.1rem 1.8rem;
-    font-family: 'Noto Serif SC', 'Songti SC', serif;
-    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.45);
-    transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1), border-color 0.5s, box-shadow 0.5s;
+  .rl-bar {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-top: 0.9rem;
+    font-size: 0.78rem; letter-spacing: 0.06em; color: var(--faint);
   }
-  .report-mini:hover {
-    transform: translateY(-4px);
-    border-color: rgba(195, 180, 228, 0.32);
-    box-shadow: 0 34px 80px rgba(0, 0, 0, 0.55);
-  }
-  .rm-kicker {
-    display: block; font-family: 'Switzer', sans-serif;
-    font-size: 0.68rem; letter-spacing: 0.16em;
-    color: var(--green); text-transform: uppercase; margin-bottom: 1rem;
-  }
-  .rm-title {
-    display: block; font-size: 1.32rem; font-weight: 600;
-    line-height: 1.62; letter-spacing: -0.01em; color: #f6f0e3;
-  }
-  .rm-metrics {
-    display: flex; flex-wrap: wrap; gap: 1rem 1.7rem;
-    margin-top: 1.4rem; padding-top: 1.1rem;
-    border-top: 1px solid rgba(243, 237, 224, 0.12);
-    font-family: 'Switzer', sans-serif;
-  }
-  .rm-metric b { display: block; font-size: 1.12rem; font-weight: 600; color: #f3ede0; }
-  .rm-metric span { display: block; font-size: 0.68rem; color: var(--faint); letter-spacing: 0.05em; margin-top: 0.15rem; }
-  .rm-hint {
-    display: block; margin-top: 1.3rem;
-    font-size: 0.78rem; letter-spacing: 0.06em; color: var(--lavender);
-  }
+  .rl-bar b { font-weight: 500; color: var(--lavender); }
 
-  /* ═══════════ REPORT MODAL ═══════════ */
-  .report-modal {
-    position: fixed; inset: 0; z-index: 90;
-    display: flex; align-items: center; justify-content: center;
-    padding: 4vh 3vw;
-    opacity: 0; visibility: hidden;
-    transition: opacity 0.4s ease, visibility 0.4s ease;
-  }
-  .report-modal.open { opacity: 1; visibility: visible; }
+  .rd-kicker { font-family: 'Switzer', sans-serif; font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; color: var(--green); margin-bottom: .9rem; }
+  .rd-title { font-size: 1.45rem; font-weight: 600; line-height: 1.6; letter-spacing: -.01em; color: #f6f0e3; margin: 0 0 .7rem; }
+  .rd-sub { font-family: 'Switzer', sans-serif; font-size: .8rem; color: var(--muted); margin-bottom: 1.1rem; }
+  .rd-thesis { font-size: .92rem; line-height: 1.95; color: rgba(243, 237, 224, .82); padding-top: 1rem; border-top: 1px solid rgba(243, 237, 224, .12); }
+  .rd-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: .8rem; border-top: 1px solid rgba(243, 237, 224, .12); border-bottom: 1px solid rgba(243, 237, 224, .12); padding: .9rem 0; margin: 1.2rem 0 .5rem; }
+  .rd-metric b { display: block; font-size: 1.3rem; font-weight: 600; color: #f3ede0; line-height: 1.2; }
+  .rd-metric span { display: block; font-family: 'Switzer', sans-serif; font-size: .66rem; letter-spacing: .04em; color: var(--faint); margin-top: .2rem; }
+  .rd-meta { font-family: 'Switzer', sans-serif; font-size: .68rem; color: var(--faint); letter-spacing: .04em; }
+
+  .rd-sec { padding-top: 1.6rem; margin-top: 1.7rem; border-top: 1px solid rgba(243, 237, 224, .1); }
+  .rd-label { font-family: 'Switzer', sans-serif; font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; color: var(--green); margin-bottom: .7rem; }
+  .rd-h { font-size: 1.05rem; font-weight: 600; line-height: 1.7; color: #f3ede0; margin-bottom: .55rem; }
+  .rd-p { font-size: .84rem; line-height: 1.95; color: rgba(243, 237, 224, .7); margin-bottom: .7rem; }
+  .rd-p b { color: #f3ede0; font-weight: 600; }
+
+  .rd-bars { display: grid; gap: .6rem; margin: .8rem 0 .6rem; }
+  .rd-bar { display: grid; grid-template-columns: 5em 1fr 3.4em; align-items: center; gap: .8rem; }
+  .rd-bar .l { font-size: .74rem; color: rgba(243, 237, 224, .66); }
+  .rd-bar .t { display: block; height: 5px; background: rgba(243, 237, 224, .1); border-radius: 3px; overflow: hidden; }
+  .rd-bar .f { display: block; height: 100%; background: #e9e1cf; border-radius: 3px; }
+  .rd-bar .f.g { background: var(--green); }
+  .rd-bar .v { font-family: 'Switzer', sans-serif; font-size: .7rem; color: var(--muted); text-align: right; }
+  .rd-bar.widev { grid-template-columns: 5em 1fr 8em; }
+  .rd-bar.widev .v { white-space: nowrap; }
+
+  .rd-find { display: grid; gap: .55rem; margin: .7rem 0; }
+  .rd-find div { display: flex; gap: .7rem; font-size: .82rem; line-height: 1.85; color: rgba(243, 237, 224, .72); }
+  .rd-find i { font-style: normal; font-family: 'Switzer', sans-serif; font-size: .68rem; font-weight: 600; color: var(--green); min-width: 1.1em; padding-top: .28rem; }
+
+  .rd-table { width: 100%; border-collapse: collapse; font-size: .74rem; line-height: 1.7; margin: .7rem 0 .4rem; }
+  .rd-table th { font-family: 'Switzer', sans-serif; font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); text-align: left; font-weight: 500; padding: .4rem; border-bottom: 1px solid rgba(243, 237, 224, .16); }
+  .rd-table td { padding: .5rem .4rem; border-bottom: 1px solid rgba(243, 237, 224, .08); color: rgba(243, 237, 224, .7); vertical-align: top; }
+  .rd-table td:first-child { color: rgba(243, 237, 224, .86); }
+  .rd-table .n { font-family: 'Switzer', sans-serif; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .rd-table .ok { color: var(--green); }
+
+  .rd-matrix td { text-align: center; }
+  .rd-matrix td:first-child { text-align: left; }
+  .rd-matrix .dot { color: rgba(233, 225, 207, .9); }
+  .rd-matrix .first { color: var(--green); }
+  .rd-matrix .none { color: rgba(243, 237, 224, .18); }
+  .rd-legend { display: flex; gap: 1rem; font-family: 'Switzer', sans-serif; font-size: .64rem; color: var(--faint); margin-top: .3rem; }
+
+  .rd-rank { display: grid; gap: .45rem; margin: .7rem 0 .4rem; }
+  .rd-rank .row { display: grid; grid-template-columns: 6.6em 4.2em 1fr 2em; align-items: center; gap: .6rem; font-size: .74rem; }
+  .rd-rank .tag { font-family: 'Switzer', sans-serif; font-size: .6rem; letter-spacing: .05em; color: var(--faint); }
+  .rd-rank .t { display: block; height: 4px; background: rgba(243, 237, 224, .08); border-radius: 2px; overflow: hidden; }
+  .rd-rank .f { display: block; height: 100%; background: rgba(233, 225, 207, .7); }
+  .rd-rank .v { font-family: 'Switzer', sans-serif; font-size: .68rem; color: var(--muted); text-align: right; }
+
+  .rd-take { border-left: 2px solid var(--green); background: rgba(150, 190, 130, .07); padding: .8rem 1rem; font-size: .82rem; line-height: 1.85; color: #d9e4cd; margin: .8rem 0 0; }
+  .rd-note { font-family: 'Switzer', sans-serif; font-size: .66rem; line-height: 1.7; color: var(--faint); margin-top: .6rem; }
+
   .rm-backdrop {
     position: absolute; inset: 0;
     background: rgba(4, 5, 7, 0.8);
     -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px);
   }
-  .report-modal .report {
-    position: relative;
-    width: 100%; max-width: 920px; max-height: 88vh;
-    overflow-y: auto; overscroll-behavior: contain;
-    background: linear-gradient(168deg, rgba(23, 23, 28, 0.99), rgba(9, 9, 11, 1));
-    box-shadow: 0 60px 140px rgba(0, 0, 0, 0.8);
-    transform: translateY(18px) scale(0.985);
-    transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
-  }
-  .report-modal.open .report { transform: none; }
   .rm-close {
     position: absolute; top: max(2.2vh, 14px); right: max(2.2vw, 14px); z-index: 2;
     width: 2.6rem; height: 2.6rem; display: grid; place-items: center;
@@ -348,15 +302,11 @@
     .hero-inner { flex-direction: column; gap: 1.6rem; }
     .hero-en { font-size: 1.9rem; }
     .film video { border-radius: 1.1rem 0.6rem 1rem 0.7rem / 0.7rem 1rem 0.6rem 1.1rem; }
-    .metrics { grid-template-columns: repeat(2, 1fr); gap: 1.4rem; }
-    .report { padding: 1.6rem 1.3rem 1.4rem; }
-    .report h3 { font-size: 1.34rem; }
-    .report-mini { padding: 1.5rem 1.4rem 1.4rem; }
-    .rm-title { font-size: 1.12rem; }
-    .report-modal { padding: 2vh 2vw; }
-    .report-modal .report { max-height: 92vh; }
+    .report-scroll { height: 520px; padding: 1.4rem 1.3rem 2.6rem; }
+    .rd-title { font-size: 1.18rem; }
+    .rd-metrics { grid-template-columns: repeat(2, 1fr); }
+    .rd-rank .row { grid-template-columns: 5.6em 3.6em 1fr 2em; }
     .rm-close { top: 12px; right: 12px; width: 2.3rem; height: 2.3rem; }
-    .bar-row { grid-template-columns: 5em 1fr 3.6em; }
   }
 
   /* ═══════════ NIGHT HERO ═══════════ */
@@ -527,93 +477,230 @@
         <p class="p-tags">Node · SQLite · Playwright CDP · 报告自动化</p>
       </div>
       <div class="work-out">
-        <button class="report-mini" type="button" data-open-report aria-label="查看 GEO 样例报告">
-          <span class="rm-kicker">AI Visibility Baseline · 2026 · 样例</span>
-          <span class="rm-title">AI 愿意把你放进候选，<br>但只有被点名时，它才想得到你。</span>
-          <span class="rm-metrics">
-            <span class="rm-metric"><b>36.7%</b><span>提及率</span></span>
-            <span class="rm-metric"><b>16.7%</b><span>首选率</span></span>
-            <span class="rm-metric"><b>11.1%</b><span>声量份额</span></span>
-            <span class="rm-metric"><b>0/30</b><span>自有信源</span></span>
-          </span>
-          <span class="rm-hint">点击放大 →</span>
-        </button>
+        <div class="report-view">
+          <div class="report-scroll" tabindex="0" role="region" aria-label="GEO 完整样例报告">
+            <p class="rd-kicker">AI Visibility Baseline · 2026 · 完整报告</p>
+            <h3 class="rd-title">AI 愿意把你放进候选，<br>但只有被点名时，它才想得到你。</h3>
+            <p class="rd-sub">南京高端伴手礼 · 6 个购买问题 · 5 个平台 · 30 条真实回答</p>
+            <p class="rd-thesis">在 30 条真实 AI 回答里，<b>xxx</b> 被提到 <b>11 次</b>；其中 <b>10 次</b>来自两个直接点名品牌的问题。</p>
+            <div class="rd-metrics">
+              <div class="rd-metric"><b>36.7%</b><span>提及率 · 11/30</span></div>
+              <div class="rd-metric"><b>16.7%</b><span>首选率 · 5/30</span></div>
+              <div class="rd-metric"><b>11.1%</b><span>声量份额 · 11/99</span></div>
+              <div class="rd-metric"><b>0/30</b><span>自有信源召回</span></div>
+            </div>
+            <p class="rd-meta">数据来自各平台真实网页回答，非 API 模拟 · 核心信息已脱敏</p>
+
+            <section class="rd-sec">
+              <p class="rd-label">关于品牌</p>
+              <p class="rd-h">触手可及的伴手礼博物馆</p>
+              <p class="rd-p">专注高端定制伴手礼 <b>xxx</b> 年，全国加盟及代理 <b>xxx</b> 余家，门店覆盖 <b>xxx</b>。婚礼、商务、宴会、节礼——在人生的每一个节点，用礼物传递温暖。</p>
+              <p class="rd-note">品牌门店实景影像已隐去。</p>
+            </section>
+
+            <section class="rd-sec">
+              <p class="rd-label">01 · 执行摘要</p>
+              <p class="rd-h">五个平台都承认你「拿得出手」，<br>但一致把你归为礼盒店，而不是南京特产。</p>
+              <p class="rd-p">问到你名字时，五个平台全部给出正面描述——颜值高、可定制、适合送礼。分歧只有一个：当用户想带「南京味道」走时，AI 会不会想到你。这不是口碑问题：五个平台都没说产品不好，但问题里一旦不出现品牌名，答案就转向盐水鸭、雨花茶与老字号。缺的不是评价，而是一个能把品牌与「南京伴手礼」连起来的可引用来源。</p>
+              <div class="rd-bars">
+                <div class="rd-bar"><span class="l">品牌题提及</span><span class="t"><span class="f" style="width:100%"></span></span><span class="v">10 / 10</span></div>
+                <div class="rd-bar"><span class="l">对比题提及</span><span class="t"><span class="f" style="width:100%"></span></span><span class="v">10 / 10</span></div>
+                <div class="rd-bar"><span class="l">场景题提及</span><span class="t"><span class="f g" style="width:5%"></span></span><span class="v">1 / 20</span></div>
+                <div class="rd-bar"><span class="l">自有信源</span><span class="t"><span class="f g" style="width:1%"></span></span><span class="v">0 / 30</span></div>
+              </div>
+              <p class="rd-note">图 1 · 同一批回答的四种切法：不是整体偏低，而是两极分化。Source: 2026-11-11 基线批次，n = 30。</p>
+              <div class="rd-find">
+                <div><i>i</i><span><b>归类偏差。</b>五个平台一致把品牌描述为「礼盒定制 / 高颜值伴手礼」，而不是「南京特产」，导致场景题不会主动调用。</span></div>
+                <div><i>ii</i><span><b>证据缺失。</b>DeepSeek 明确要求「实地比对」，因为可检索内容几乎全部来自社交分享，没有权威第三方评测。</span></div>
+                <div><i>iii</i><span><b>自有信源为零。</b>30 条回答没有一条引用官方内容，AI 对品牌的全部认知建立在第三方转述之上。</span></div>
+              </div>
+              <table class="rd-table">
+                <thead><tr><th>平台</th><th>它如何描述你</th><th>立场</th></tr></thead>
+                <tbody>
+                  <tr><td>DeepSeek</td><td>「可以纳入考虑」，但缺乏独立第三方评测，建议实地比对。</td><td class="n">条件推荐</td></tr>
+                  <tr><td>豆包</td><td>包装颜值突出，但不是印象里的南京特色，食物分量偏少。</td><td class="n">礼盒定位</td></tr>
+                  <tr><td>元宝</td><td>颜值高、包装体面、食品自研的中高端礼品店。</td><td class="n ok">正面</td></tr>
+                  <tr><td>千问</td><td>可以送，但若对方看重正宗南京特产，不是最典型选择。</td><td class="n">条件推荐</td></tr>
+                  <tr><td>百度</td><td>整体靠谱，适合婚礼、生日等有仪式感的场合。</td><td class="n ok">正面</td></tr>
+                </tbody>
+              </table>
+              <p class="rd-note">表 1 · 五个平台对你的描述与立场。Source: 平台回答原文摘录。</p>
+              <p class="rd-take">问题不在口碑，在归类。AI 把你归入「礼盒定制」而不是「南京伴手礼」，所以场景题不会主动调用你。</p>
+            </section>
+
+            <section class="rd-sec">
+              <p class="rd-label">02 · 问题面板</p>
+              <p class="rd-h">我们替你问了 6 个真实购买问题。</p>
+              <p class="rd-p">问题覆盖品牌、对比、场景三类真实意图。品牌题与对比题满分命中；场景题合计 20 条回答，只出现 1 次。</p>
+              <table class="rd-table">
+                <thead><tr><th>问题</th><th>类型</th><th>提及</th><th>首选</th><th>AI 的反应</th></tr></thead>
+                <tbody>
+                  <tr><td>南京伴手礼送人，xxx 怎么样？</td><td>品牌</td><td class="n">5/5</td><td class="n">3/5</td><td>五平台全提，三家列为首选</td></tr>
+                  <tr><td>xxx 和徐福记、元祖比怎么样？</td><td>对比</td><td class="n">5/5</td><td class="n">2/5</td><td>定位差异清楚，但不总是首选</td></tr>
+                  <tr><td>南京结婚喜糖和伴手礼定制店推荐</td><td>场景</td><td class="n">1/5</td><td class="n">0/5</td><td>仅千问提到，且未列首位</td></tr>
+                  <tr><td>南京高定伴手礼推荐哪家？</td><td>场景</td><td class="n">0/5</td><td class="n">0/5</td><td>让位给洋坊有礼、盛源祥</td></tr>
+                  <tr><td>南京送客户的高端伴手礼礼盒哪家好？</td><td>场景</td><td class="n">0/5</td><td class="n">0/5</td><td>答案被云锦、韩复兴占据</td></tr>
+                  <tr><td>南京有哪些适合送外地朋友的伴手礼品牌？</td><td>场景</td><td class="n">0/5</td><td class="n">0/5</td><td>盐水鸭、雨花茶、老字号主导</td></tr>
+                </tbody>
+              </table>
+              <p class="rd-note">表 2 · 问题面板与逐题结果。面板自 2026-11-11 起固定，用于后续季度环比。</p>
+              <div class="rd-bars">
+                <div class="rd-bar"><span class="l">品牌题</span><span class="t"><span class="f" style="width:100%"></span></span><span class="v">5 / 5</span></div>
+                <div class="rd-bar"><span class="l">对比题</span><span class="t"><span class="f" style="width:100%"></span></span><span class="v">5 / 5</span></div>
+                <div class="rd-bar"><span class="l">场景题</span><span class="t"><span class="f g" style="width:5%"></span></span><span class="v">1 / 20</span></div>
+              </div>
+              <p class="rd-p">品牌题与对比题各只有一个问题，却贡献了全部 10 次提及；四个场景题合计 20 条回答，只换回 1 次出现。这不是随机波动，而是结构性的：当你的品牌名没有出现在问题里，AI 没有理由主动把你放进候选名单。</p>
+              <p class="rd-take">你的可见度不是均匀偏低，而是断崖式集中在「被点名」的语境。场景题才是购买发生的地方，也是目前唯一的增量空间。</p>
+            </section>
+
+            <section class="rd-sec">
+              <p class="rd-label">03 · 平台视图</p>
+              <p class="rd-h">检索最勤的平台，也没有多推荐你。</p>
+              <p class="rd-p">DeepSeek、豆包、元宝六次提问全部触发检索，提及率仍然只有三分之一。千问不检索，靠模型记忆反而提到你最多——但这类答案无法通过内容投放改变。</p>
+              <table class="rd-table">
+                <thead><tr><th>平台</th><th>提及率</th><th>首选率</th><th>检索触发</th><th>本轮判断</th></tr></thead>
+                <tbody>
+                  <tr><td>DeepSeek</td><td class="n">33.3%</td><td class="n">33.3%</td><td class="n">100%</td><td>检索全开，优先修</td></tr>
+                  <tr><td>豆包</td><td class="n">33.3%</td><td class="n">16.7%</td><td class="n">100%</td><td>答案最拥挤</td></tr>
+                  <tr><td>元宝</td><td class="n">33.3%</td><td class="n">0.0%</td><td class="n">100%</td><td>只提不推</td></tr>
+                  <tr><td>千问</td><td class="n ok">50.0%</td><td class="n">16.7%</td><td class="n">0%</td><td>不检索，不可干预</td></tr>
+                  <tr><td>百度</td><td class="n">33.3%</td><td class="n">16.7%</td><td class="n">33.3%</td><td>检索不稳定</td></tr>
+                </tbody>
+              </table>
+              <p class="rd-note">表 3 · 平台三指标：提及、首选、检索。每平台 6 条回答。</p>
+              <p class="rd-p">把三家「检索全开」的平台放在一起看，问题更清楚：检索已经发生，而且每次都在发生，但检索到的材料没有改变答案。理想区在本轮为空——还没有任何一个平台同时做到「查得到」和「愿意推」。</p>
+              <p class="rd-take">检索已经发生，但没有转化为推荐。问题在信源质量与归类，不在平台投放预算。</p>
+            </section>
+
+            <section class="rd-sec">
+              <p class="rd-label">04 · 命中矩阵</p>
+              <p class="rd-h">30 个格子里，只有 11 个出现品牌。</p>
+              <p class="rd-p">品牌题与对比题贡献了全部 10 次提及；四个场景题合计 20 条回答，只出现 1 次，且未被列为首选。</p>
+              <table class="rd-table rd-matrix">
+                <thead><tr><th>用户问题</th><th>DeepSeek</th><th>豆包</th><th>元宝</th><th>千问</th><th>百度</th></tr></thead>
+                <tbody>
+                  <tr><td>送人（品牌题）</td><td class="dot">●</td><td class="dot">●</td><td class="none">·</td><td class="none">·</td><td class="dot">●</td></tr>
+                  <tr><td>对比（对比题）</td><td class="dot">●</td><td class="dot">●</td><td class="none">·</td><td class="none">·</td><td class="none">·</td></tr>
+                  <tr><td>婚礼喜糖 · 定制店</td><td class="none">·</td><td class="none">·</td><td class="none">·</td><td class="dot">●</td><td class="none">·</td></tr>
+                  <tr><td>高定伴手礼推荐</td><td class="none">·</td><td class="none">·</td><td class="none">·</td><td class="none">·</td><td class="none">·</td></tr>
+                  <tr><td>送客户高端礼盒</td><td class="none">·</td><td class="none">·</td><td class="none">·</td><td class="none">·</td><td class="none">·</td></tr>
+                  <tr><td>送外地朋友</td><td class="none">·</td><td class="none">·</td><td class="none">·</td><td class="none">·</td><td class="none">·</td></tr>
+                </tbody>
+              </table>
+              <div class="rd-legend"><span>● 提到品牌</span><span>· 未提到</span></div>
+              <table class="rd-table">
+                <thead><tr><th>平台</th><th>提及</th><th>首选</th><th>检索</th><th>声量份额</th></tr></thead>
+                <tbody>
+                  <tr><td>DeepSeek</td><td class="n">2/6</td><td class="n">2/6</td><td class="n">6/6</td><td class="n">20.0%</td></tr>
+                  <tr><td>豆包</td><td class="n">2/6</td><td class="n">1/6</td><td class="n">6/6</td><td class="n">6.7%</td></tr>
+                  <tr><td>元宝</td><td class="n">2/6</td><td class="n">0/6</td><td class="n">6/6</td><td class="n">11.1%</td></tr>
+                  <tr><td>千问</td><td class="n">3/6</td><td class="n">1/6</td><td class="n">0/6</td><td class="n">14.3%</td></tr>
+                  <tr><td>百度</td><td class="n">2/6</td><td class="n">1/6</td><td class="n">2/6</td><td class="n">10.0%</td></tr>
+                </tbody>
+              </table>
+              <p class="rd-note">表 4 · 逐平台读数与问题覆盖。声量份额按平台内全部品牌与品类提及为分母。</p>
+              <p class="rd-take">唯一不靠「点名」也能被提到的是千问的婚礼题——它说明只要内容里把婚礼场景与品牌绑定，场景题是可以被撬动的。</p>
+            </section>
+
+            <section class="rd-sec">
+              <p class="rd-label">05 · 竞品格局</p>
+              <p class="rd-h">分走声量的不只是同行，<br>还有南京的城市符号。</p>
+              <p class="rd-p">99 次提及中，雨花茶、云锦、金箔三个品类词合计 33 次。它们不是公司，无法被超越；真正可以追赶的是韩复兴和好一朵茉莉花。</p>
+              <div class="rd-rank">
+                <div class="row"><span>雨花茶</span><span class="tag">品类符号</span><span class="t"><span class="f" style="width:100%"></span></span><span class="v">15</span></div>
+                <div class="row"><span>韩复兴</span><span class="tag">老字号</span><span class="t"><span class="f" style="width:80%"></span></span><span class="v">12</span></div>
+                <div class="row"><span>云锦</span><span class="tag">品类符号</span><span class="t"><span class="f" style="width:80%"></span></span><span class="v">12</span></div>
+                <div class="row"><span>好一朵茉莉花</span><span class="tag">品牌</span><span class="t"><span class="f" style="width:73%"></span></span><span class="v">11</span></div>
+                <div class="row"><span>xxx</span><span class="tag">本品牌</span><span class="t"><span class="f g" style="width:73%"></span></span><span class="v">11</span></div>
+                <div class="row"><span>金箔</span><span class="tag">品类符号</span><span class="t"><span class="f" style="width:40%"></span></span><span class="v">6</span></div>
+                <div class="row"><span>泸溪河</span><span class="tag">品牌</span><span class="t"><span class="f" style="width:33%"></span></span><span class="v">5</span></div>
+                <div class="row"><span>洋坊有礼</span><span class="tag">同址竞品</span><span class="t"><span class="f" style="width:33%"></span></span><span class="v">5</span></div>
+                <div class="row"><span>桂花鸭</span><span class="tag">老字号</span><span class="t"><span class="f" style="width:33%"></span></span><span class="v">5</span></div>
+              </div>
+              <p class="rd-note">图 5 · 声量排名，列前 9 位。浅色为品类符号，非可竞争实体。</p>
+              <p class="rd-p">这张榜的前三名里有两个不是公司：雨花茶、云锦。它们无法被超越，却占着同一个位置——用户问「南京伴手礼送什么」，AI 先用它们回答。真正可以追赶的是韩复兴与好一朵茉莉花：前者靠老字号的信任状，后者把品牌名与城市符号绑成一句话。</p>
+              <p class="rd-p">更近的威胁来自洋坊有礼。它与你同址，已被 AI 定义为「婚礼高定首选」。生成式答案里，先被写进信源的那一个会被反复引用，后来者很难改写。</p>
+              <p class="rd-take">最危险的不是韩复兴，是同址的洋坊有礼——AI 已把它定义为「婚礼高定首选」。</p>
+            </section>
+
+            <section class="rd-sec">
+              <p class="rd-label">06 · 信源证据</p>
+              <p class="rd-h">267 个信源里，<br>没有一个是你的。</p>
+              <p class="rd-p">答案原材料集中在抖音、公众号、知乎，占全部引用的 46%；其余 54% 来自媒体、企业信息与地图，同样没有一条属于品牌官方。</p>
+              <div class="rd-metrics">
+                <div class="rd-metric"><b>123</b><span>社交引用 · 46%</span></div>
+                <div class="rd-metric"><b>144</b><span>媒体 / 企业信息 / 地图 · 54%</span></div>
+                <div class="rd-metric"><b>0/30</b><span>自有信源召回</span></div>
+                <div class="rd-metric"><b>4 次</b><span>同名主体风险</span></div>
+              </div>
+              <div class="rd-rank">
+                <div class="row"><span>抖音</span><span class="tag">社交</span><span class="t"><span class="f" style="width:100%"></span></span><span class="v">80</span></div>
+                <div class="row"><span>微信公众号</span><span class="tag">社交</span><span class="t"><span class="f" style="width:21%"></span></span><span class="v">17</span></div>
+                <div class="row"><span>知乎专栏</span><span class="tag">社交</span><span class="t"><span class="f" style="width:15%"></span></span><span class="v">12</span></div>
+                <div class="row"><span>daxaingsichu.cn</span><span class="tag">攻略站</span><span class="t"><span class="f" style="width:14%"></span></span><span class="v">11</span></div>
+                <div class="row"><span>百度系</span><span class="tag">地图 / 信息</span><span class="t"><span class="f" style="width:9%"></span></span><span class="v">7</span></div>
+              </div>
+              <p class="rd-note">图 8 · 被引用最多的域名。Source: 267 次引用，80 个域名。</p>
+              <p class="rd-p">抖音一家就占了 80 次引用，是第二名公众号的近五倍。这不是因为 AI 偏爱短视频，而是因为短视频文案短、口语化、带着具体的店名与场景，最接近「可以直接抄进答案」的形态。</p>
+              <p class="rd-p">0/30 与 4 次的组合说明两件事：一是品牌在检索中处于「被描述」而不是「自我描述」的位置；二是同名主体会把检索流量分走。企查查里的「xxx 食品店」与你并非同一主体，但 AI 无法自行区分。</p>
+              <table class="rd-table">
+                <thead><tr><th>来源</th><th>页面内容</th><th>对答案的影响</th></tr></thead>
+                <tbody>
+                  <tr><td>企查查</td><td>xxx 食品店</td><td>易被误读为外地同名企业</td></tr>
+                  <tr><td>大众点评</td><td>xxx · 喜糖伴手礼（xx 店）</td><td>只提供门店与评价，无品牌定位</td></tr>
+                  <tr><td>xootour.com</td><td>南京伴手礼到底在哪买才不亏</td><td>第三方攻略，未区分定制与特产</td></tr>
+                </tbody>
+              </table>
+              <p class="rd-note">表 5 · AI 实际引用的页面（摘录）。Source: 平台返回的引用记录与原页面标题。</p>
+              <p class="rd-take">品牌在 AI 里的「事实底座」是空的。没有官方事实页，AI 只能转述别人的说法——包括同名企业的说法。</p>
+            </section>
+
+            <section class="rd-sec">
+              <p class="rd-label">07 · 行动建议</p>
+              <p class="rd-h">下个月只做三件事。</p>
+              <p class="rd-p">目标不是把 36.7% 变成 60%，而是先让场景题从 1/20 变成 5/20 —— 那才是生意增量所在。</p>
+              <table class="rd-table">
+                <thead><tr><th>优先级</th><th>动作</th><th>解决什么</th><th>验证指标</th></tr></thead>
+                <tbody>
+                  <tr><td class="n ok">P0</td><td>建立官方事实页</td><td>在官网与公众号固定一页：品牌全称、成立年份、门店、自有食品线与资质，以及与同名主体的区分说明。</td><td class="n">自有信源召回 &gt; 0</td></tr>
+                  <tr><td class="n">P1</td><td>补「南京特产型」内容</td><td>在抖音、知乎、公众号三个已被 AI 大量引用的渠道，发布能被检索到的长文与问答，回答「xxx 算不算南京伴手礼」。</td><td class="n">场景题提及 5/20</td></tr>
+                  <tr><td class="n">P2</td><td>做差异化对比内容</td><td>对韩复兴、好一朵做场景分工对比；对同址的洋坊有礼，把「婚礼全案」与「日常送礼」切开。</td><td class="n">对比题保持 5/5</td></tr>
+                </tbody>
+              </table>
+              <p class="rd-note">表 6 · 三项优先动作与验证指标。基于本轮 gap 分析，指标沿用同一问题面板复测。</p>
+              <div class="rd-bars">
+                <div class="rd-bar widev"><span class="l">第 1–2 周</span><span class="t"><span class="f" style="width:34%"></span></span><span class="v">事实页上线</span></div>
+                <div class="rd-bar widev"><span class="l">第 3–4 周</span><span class="t"><span class="f" style="width:66%"></span></span><span class="v">6 篇场景长文</span></div>
+                <div class="rd-bar widev"><span class="l">第 2 个月</span><span class="t"><span class="f" style="width:100%"></span></span><span class="v">对比内容与投放</span></div>
+              </div>
+              <p class="rd-take">先让 AI 拿到关于你的第一手事实，再让它在你没被点名时也能想起你。</p>
+            </section>
+
+            <section class="rd-sec">
+              <p class="rd-label">附录 · 方法与局限</p>
+              <p class="rd-h">这是一次横截面测量，不是趋势判断。</p>
+              <p class="rd-p">6 个真实购买意图问题 × 5 个平台 × 1 轮 = 30 条回答。问题面板自 2026-11-11 起固定，覆盖品牌、对比、场景三类意图，分别对应「知道你」「比较你」「在需要时想起你」三个决策阶段。</p>
+              <table class="rd-table">
+                <thead><tr><th>指标</th><th>口径</th></tr></thead>
+                <tbody>
+                  <tr><td>提及率</td><td>提到品牌的回答数 ÷ 总回答数。衡量 AI 是否知道这个品牌。</td></tr>
+                  <tr><td>首选率</td><td>被列为首选的回答数 ÷ 总回答数。衡量 AI 是否愿意推荐。</td></tr>
+                  <tr><td>声量份额</td><td>品牌提及次数 ÷ 全部品牌与品类提及次数。衡量相对存在感。</td></tr>
+                  <tr><td>自有信源召回</td><td>引用了官网或官方公众号的回答数 ÷ 总回答数。</td></tr>
+                </tbody>
+              </table>
+              <p class="rd-p">本报告为单轮基线，反映 2026-11-11 的横截面，不能当作趋势。生成式答案存在随机性，行业惯例是每平台重复 3 轮以上再下结论。建议每季度复测一次，问题面板保持不变，才能做环比。</p>
+              <p class="rd-note">本页为公开样例，品牌名、门店影像、分店与同名主体等核心信息已用 xxx 替代。</p>
+            </section>
+          </div>
+          <p class="rl-bar"><span>完整报告 · 核心信息已脱敏</span><b>在框内滚动阅读 ↓</b></p>
+        </div>
       </div>
     </div>
   </section>
 
   <footer>© 2026 Gao Xinyi</footer>
 
-</div>
-
-<!-- ═══════ REPORT MODAL ═══════ -->
-<div class="report-modal" id="reportModal" aria-hidden="true">
-  <div class="rm-backdrop" data-close-report></div>
-  <button class="rm-close" type="button" data-close-report aria-label="关闭样例报告">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-  </button>
-  <div class="report" role="dialog" aria-modal="true" aria-labelledby="reportTitle">
-    <p class="report-kicker">AI Visibility Baseline · 2026</p>
-    <h3 id="reportTitle">AI 愿意把你放进候选，<br>但只有被点名时，它才想得到你。</h3>
-    <p class="report-sub">客户为南京一家高端伴手礼品牌。2026 年 11 月基线：6 个真实购买问题 × 5 个 AI 平台 = 30 条回答。以下为脱敏摘要，完整报告约 11 页。</p>
-
-    <div class="metrics">
-      <div class="metric">
-        <div class="num">36.7<small>%</small></div>
-        <div class="lbl">提及率</div>
-        <div class="calc">11 / 30 条回答</div>
-      </div>
-      <div class="metric">
-        <div class="num">16.7<small>%</small></div>
-        <div class="lbl">首选率</div>
-        <div class="calc">5 / 30 条回答</div>
-      </div>
-      <div class="metric">
-        <div class="num">11.1<small>%</small></div>
-        <div class="lbl">声量份额</div>
-        <div class="calc">11 / 总计 99 次</div>
-      </div>
-      <div class="metric">
-        <div class="num">0<small>/30</small></div>
-        <div class="lbl">自有信源召回</div>
-        <div class="calc">无一条引用官方内容</div>
-      </div>
-    </div>
-
-    <div class="r-block">
-      <p class="r-h">按问题类型拆分</p>
-      <div class="bars">
-        <div class="bar-row">
-          <span class="bl">品牌题</span>
-          <div class="bar-track"><div class="bar-fill" style="width:100%;"></div></div>
-          <span class="bv">5 / 5</span>
-        </div>
-        <div class="bar-row">
-          <span class="bl">对比题</span>
-          <div class="bar-track"><div class="bar-fill" style="width:100%;"></div></div>
-          <span class="bv">5 / 5</span>
-        </div>
-        <div class="bar-row">
-          <span class="bl">场景题</span>
-          <div class="bar-track"><div class="bar-fill light" style="width:5%;"></div></div>
-          <span class="bv">1 / 20</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="r-block">
-      <p class="r-h">三条判断</p>
-      <div class="findings">
-        <div class="finding"><i>i</i><span><b>归类偏差。</b>五个平台一致把品牌描述为「礼盒定制 / 高颜值伴手礼」，而不是「南京特产」，场景类问题因此不会主动调用。</span></div>
-        <div class="finding"><i>ii</i><span><b>证据缺失。</b>即使检索最勤的平台也要求「实地比对」：可检索内容几乎全部来自社交分享，没有权威第三方评测。</span></div>
-        <div class="finding"><i>iii</i><span><b>自有信源为零。</b>30 条回答没有一条引用品牌官方内容，AI 对品牌的全部认知建立在第三方转述之上。</span></div>
-      </div>
-    </div>
-
-    <div class="r-quote">问题不在平台投放预算，而在信源质量与归类：检索已经发生，却没有转化为推荐。</div>
-
-    <p class="r-note">样例已做脱敏：品牌名、门店影像与原始问答全文不在公开页面中。报告结构：执行摘要 · 问题面板 · 平台视图 · 命中矩阵 · 竞品格局 · 信源证据 · 行动建议 · 方法与局限。</p>
-  </div>
 </div>
 
 <!-- ═══════ WECHAT QR MODAL ═══════ -->
@@ -647,32 +734,6 @@
       player.play().catch(() => {});
     });
   });
-
-  /* report sample opens as an enlarged overlay */
-  const reportModal = document.getElementById("reportModal");
-  if (reportModal) {
-    const closeBtn = reportModal.querySelector(".rm-close");
-    let lastFocus = null;
-    const openReport = (e) => {
-      e.preventDefault();
-      lastFocus = document.activeElement;
-      reportModal.classList.add("open");
-      reportModal.setAttribute("aria-hidden", "false");
-      document.documentElement.style.overflow = "hidden";
-      closeBtn.focus();
-    };
-    const closeReport = () => {
-      reportModal.classList.remove("open");
-      reportModal.setAttribute("aria-hidden", "true");
-      document.documentElement.style.overflow = "";
-      if (lastFocus) lastFocus.focus();
-    };
-    document.querySelectorAll("[data-open-report]").forEach((el) => el.addEventListener("click", openReport));
-    reportModal.querySelectorAll("[data-close-report]").forEach((el) => el.addEventListener("click", closeReport));
-    addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && reportModal.classList.contains("open")) closeReport();
-    });
-  }
 
   /* say hi opens the WeChat QR card */
   const qrModal = document.getElementById("qrModal");
