@@ -6,7 +6,6 @@ import { ShaderPass } from "three/addons/postprocessing/ShaderPass.js";
 
 const host = document.getElementById("valley");
 const ui = document.getElementById("ui");
-const loader = document.getElementById("loader");
 const soundBtn = document.getElementById("sound");
 const go = document.getElementById("go");
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -411,8 +410,9 @@ function makeImpulse(seconds, decay) {
 function chime(t) {
   const notes = [587.33, 659.25, 739.99, 880, 987.77, 1174.66];
   const f = notes[(Math.random() * notes.length) | 0];
-  const pan = actx.createStereoPanner();
-  pan.pan.value = Math.random() * 1.6 - 0.8;
+  // older iOS lacks StereoPanner; fall back to a plain gain node
+  const pan = actx.createStereoPanner ? actx.createStereoPanner() : actx.createGain();
+  if (pan.pan) pan.pan.value = Math.random() * 1.6 - 0.8;
   pan.connect(damp);
 
   [[1, 0.06, 3.4], [2.76, 0.014, 1.6]].forEach(([ratio, peak, tail]) => {
@@ -428,7 +428,7 @@ function chime(t) {
 
 function scheduleChime() {
   setTimeout(() => {
-    if (actx) chime(actx.currentTime + 0.05);
+    try { if (actx) chime(actx.currentTime + 0.05); } catch (e) {}
     scheduleChime();
   }, 2200 + Math.random() * 4200);
 }
@@ -487,7 +487,7 @@ if (actx.state === "running") unmute();
 else actx.resume().then(() => { if (actx.state === "running" && !started) unmute(); }).catch(() => {});
 
 // browsers hold audio until a gesture; start on the first one, except on the toggle itself
-["pointerdown", "keydown", "touchstart", "wheel"].forEach((ev) => {
+["pointerdown", "pointerup", "touchend", "click", "keydown", "wheel"].forEach((ev) => {
   addEventListener(ev, (e) => {
     if (e.target && e.target.closest && e.target.closest("#sound")) return;
     wake();
@@ -497,9 +497,13 @@ else actx.resume().then(() => { if (actx.state === "running" && !started) unmute
 soundBtn.addEventListener("click", () => {
   initAudio();
   if (!audioReady) return;
-  if (actx.state === "suspended") actx.resume();
+  if (actx.state !== "running") actx.resume();
+  // a tap while the context is still held (common on iOS) should start sound, not mute it
+  if (!started || actx.state !== "running") {
+    unmute();
+    return;
+  }
   muted = !muted;
-  started = true;
   soundBtn.setAttribute("aria-pressed", String(!muted));
   master.gain.cancelScheduledValues(actx.currentTime);
   master.gain.linearRampToValueAtTime(muted ? 0 : TARGET_VOL, actx.currentTime + (muted ? 0.5 : 1.4));
@@ -560,7 +564,7 @@ function frame() {
   composer.render();
   if (first) {
     first = false;
-    setTimeout(() => { loader.classList.add("gone"); ui.classList.add("on"); }, reduce ? 100 : 900);
+    setTimeout(() => { ui.classList.add("on"); }, reduce ? 100 : 900);
   }
 }
 frame();
