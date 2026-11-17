@@ -61,11 +61,9 @@
   .hero { padding-top: 6rem; }
   .hero-inner { display: flex; gap: 2.8rem; align-items: flex-start; }
   .hero-avatar {
-    width: 100px; height: 100px;
-    border-radius: 50%; object-fit: cover;
+    width: 108px; height: 144px;
     flex-shrink: 0;
-    filter: contrast(1.04);
-    border: 2px solid var(--beige-dk);
+    filter: saturate(0.9) contrast(1.02) drop-shadow(0 0 24px rgba(195, 180, 228, 0.14));
   }
   .hero-en {
     font-size: 2.7rem; font-weight: 500;
@@ -74,11 +72,6 @@
   }
   .hero-en em { color: var(--lavender); font-style: italic; }
   .hero-cn { color: var(--muted); font-size: 1.02rem; margin-bottom: 0.6rem; }
-  .hero-tagline {
-    display: inline-block; margin-top: 0.4rem;
-    font-size: 0.82rem; color: var(--lavender);
-    letter-spacing: 0.06em; text-transform: uppercase;
-  }
 
   /* ═══════════ SECTION LABEL ═══════════ */
   .sec-label {
@@ -396,11 +389,10 @@
   <!-- ═══════ HERO ═══════ -->
   <section class="hero">
     <div class="hero-inner">
-      <img class="hero-avatar" src="profile.jpg" alt="Gao Xinyi">
+      <img class="hero-avatar" src="assets/avatar-soft.png" alt="Gao Xinyi">
       <div class="hero-text">
-        <p class="hero-en"><em>I build, I speak</em> — hope we can all live a little more awake, a little more at ease.</p>
+        <p class="hero-en"><em>I build, I connect</em> — hoping to create things that are useful and beautiful.</p>
         <p class="hero-cn">创造，表达，链接。把在这个世界穿梭时学到的东西，放在这里。</p>
-        <p class="hero-tagline">AI 产品建造者 · 知识视频 · GEO</p>
       </div>
     </div>
   </section>
