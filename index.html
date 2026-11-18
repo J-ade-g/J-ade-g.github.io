@@ -57,13 +57,23 @@
 
   section { padding-top: 10rem; }
 
-  /* ═══════════ HERO ═══════════ */
-  .hero { padding-top: 6rem; }
-  .hero-inner { display: flex; gap: 2.8rem; align-items: flex-start; }
+  /* ═══════════ ABOUT ═══════════ */
+  .about-inner {
+    display: flex; flex-direction: row-reverse;
+    align-items: flex-start; gap: 3.8rem;
+  }
+  .about-text { flex: 1; min-width: 0; }
   .hero-avatar {
-    width: 108px; height: 144px;
+    width: 184px; height: 248px;
     flex-shrink: 0;
-    filter: saturate(0.9) contrast(1.02) drop-shadow(0 0 24px rgba(195, 180, 228, 0.14));
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 260'%3E%3Cfilter id='b' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeGaussianBlur stdDeviation='13'/%3E%3C/filter%3E%3Cpath filter='url(%23b)' fill='white' d='M104 6C156 2 190 48 192 112C194 182 160 250 100 254C40 258 4 202 8 128C12 56 50 10 104 6Z'/%3E%3C/svg%3E");
+    -webkit-mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 260'%3E%3Cfilter id='b' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeGaussianBlur stdDeviation='13'/%3E%3C/filter%3E%3Cpath filter='url(%23b)' fill='white' d='M104 6C156 2 190 48 192 112C194 182 160 250 100 254C40 258 4 202 8 128C12 56 50 10 104 6Z'/%3E%3C/svg%3E");
+    mask-size: 100% 100%;
+    mask-repeat: no-repeat;
+    mix-blend-mode: screen;
+    filter: saturate(0.92) contrast(1.02) blur(0.35px) drop-shadow(0 0 40px rgba(195, 180, 228, 0.16));
   }
   .hero-en {
     font-size: 2.7rem; font-weight: 500;
@@ -86,6 +96,86 @@
   .sec-name {
     font-size: 1.9rem; font-weight: 600;
     letter-spacing: -0.015em;
+  }
+
+  /* ═══════════ ABOUT ═══════════ */
+  .about-lead {
+    margin-top: 2.2rem;
+    font-size: 1.9rem; font-weight: 500;
+    line-height: 1.5; letter-spacing: -0.015em;
+    max-width: 24em;
+  }
+  .about-lead em { font-style: normal; color: var(--lavender); }
+  .about-contact {
+    display: flex; flex-wrap: wrap; gap: 0.75rem 2.2rem;
+    margin-top: 2.2rem; font-size: 0.95rem; color: var(--muted);
+  }
+  .about-contact a {
+    color: inherit; text-decoration: none;
+    border-bottom: 1px solid rgba(243, 237, 224, 0.18);
+    padding-bottom: 2px; transition: color 0.25s, border-color 0.25s;
+  }
+  .about-contact a:hover { color: var(--text); border-color: var(--text); }
+
+  /* ═══════════ EXPERIENCE ═══════════ */
+  .stats {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1.6rem; padding: 0 0 2rem; margin-bottom: 3.2rem;
+    border-bottom: var(--border);
+  }
+  .stat b {
+    display: block; font-family: 'Antonio', sans-serif;
+    font-size: 2.1rem; font-weight: 400;
+    letter-spacing: 0.02em; line-height: 1.1;
+  }
+  .stat span {
+    display: block; margin-top: 0.35rem;
+    font-size: 0.74rem; color: var(--faint); letter-spacing: 0.04em;
+  }
+  .job { margin-bottom: 4.4rem; }
+  .job:last-child { margin-bottom: 0; }
+  .job-head {
+    display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap;
+    padding-bottom: 0.9rem; border-bottom: var(--border);
+  }
+  .job-head h3 { font-size: 1.28rem; font-weight: 600; letter-spacing: -0.01em; }
+  .job-role { color: var(--lavender); font-size: 0.86rem; }
+  .job-date {
+    margin-left: auto; font-family: 'Antonio', sans-serif;
+    font-size: 0.76rem; letter-spacing: 0.12em; color: var(--faint);
+  }
+  .job-points { list-style: none; margin-top: 1.2rem; display: grid; gap: 0.85rem; }
+  .job-points li {
+    position: relative; padding-left: 1.2rem;
+    max-width: 60em; font-size: 0.93rem;
+    color: rgba(243, 237, 224, 0.7);
+  }
+  .job-points li::before {
+    content: ''; position: absolute; left: 0; top: 0.7em;
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--lavender); opacity: 0.6;
+  }
+  .job-points b { color: var(--text); font-weight: 600; }
+
+  /* ═══════════ CAPABILITIES ═══════════ */
+  .skill-list {
+    display: grid; grid-template-columns: 220px 1fr;
+    gap: 1.5rem 2.4rem;
+  }
+  .skill-list dt { color: var(--lavender); font-size: 0.86rem; }
+  .skill-list dd { color: rgba(243, 237, 224, 0.68); font-size: 0.92rem; }
+
+  /* ═══════════ EDUCATION ═══════════ */
+  .edu-line {
+    display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap;
+    padding: 0.95rem 0; border-bottom: var(--border);
+  }
+  .edu-line:last-child { border-bottom: 0; }
+  .edu-line h3 { font-size: 1.02rem; font-weight: 600; }
+  .edu-line .edu-major { color: var(--muted); font-size: 0.9rem; }
+  .edu-line .edu-date {
+    margin-left: auto; font-family: 'Antonio', sans-serif;
+    font-size: 0.76rem; letter-spacing: 0.12em; color: var(--faint);
   }
 
   /* ═══════════ BUILD ═══════════ */
@@ -140,7 +230,6 @@
     flex-wrap: wrap; margin-bottom: 0.8rem;
   }
   .film-head h3 { font-size: 1.18rem; font-weight: 600; }
-  .film-meta { font-size: 0.78rem; color: var(--faint); letter-spacing: 0.05em; }
   .film-cap { font-size: 0.9rem; color: var(--muted); margin-top: 0.9rem; }
   .chips { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.1rem; }
   .chip {
@@ -292,8 +381,14 @@
   @media (max-width: 720px) {
     .wrap { padding: 0 1.4rem; }
     section { padding-top: 6rem; }
-    .hero-inner { flex-direction: column; gap: 1.6rem; }
+    .about-inner { flex-direction: column; gap: 2rem; }
+    .hero-avatar { width: 156px; height: 210px; }
     .hero-en { font-size: 1.9rem; }
+    .about-lead { font-size: 1.45rem; }
+    .stats { grid-template-columns: repeat(2, 1fr); gap: 1.4rem; }
+    .skill-list { grid-template-columns: 1fr; gap: 0.35rem; }
+    .skill-list dd { margin-bottom: 0.9rem; }
+    .job-date, .edu-line .edu-date { margin-left: 0; }
     .film video { border-radius: 1.1rem 0.6rem 1rem 0.7rem / 0.7rem 1rem 0.6rem 1.1rem; }
     .report-scroll { height: 520px; padding: 1.4rem 1.3rem 2.6rem; }
     .rd-title { font-size: 1.18rem; }
@@ -330,6 +425,10 @@
     to   { opacity: 1; transform: translateY(0);    filter: blur(0); }
   }
   @keyframes softIn { from { opacity: 0 } to { opacity: 1 } }
+  @keyframes heroInSoft {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
   .ui.on .hero-night h1 { animation: heroIn 3.4s cubic-bezier(0.16, 0.84, 0.24, 1) 0.15s both; }
   .ui.on .hero-night .cap { animation: heroIn 2.6s cubic-bezier(0.16, 0.84, 0.24, 1) 1.15s both; }
   .ui.on .hero-night .go { animation: heroIn 2.2s cubic-bezier(0.16, 0.84, 0.24, 1) 1.85s both; }
@@ -347,7 +446,10 @@
 
   @media (max-width: 820px) {
     #night { --u: 1px; }
-    .hero-night h1 { font-size: clamp(26px, 9.1vw, 64px); white-space: nowrap; }
+    .hero-night h1 { font-size: clamp(24px, 8.7vw, 60px); white-space: nowrap; }
+    .ui.on .hero-night h1 { animation: heroInSoft 2s cubic-bezier(0.16, 0.84, 0.24, 1) 0.1s both; }
+    .ui.on .hero-night .cap { animation: heroInSoft 1.4s cubic-bezier(0.16, 0.84, 0.24, 1) 0.8s both; }
+    .ui.on .hero-night .go { animation: heroInSoft 1.1s cubic-bezier(0.16, 0.84, 0.24, 1) 1.3s both; }
     .hero-night .cap { font-size: 17px; }
     .go { width: 54px; height: 54px; }
     .go svg { width: 20px; height: 20px; }
@@ -379,20 +481,32 @@
   <div class="bar">
     <a class="logo" href="#night">GAO XINYI</a>
     <nav class="links" aria-label="Main">
+      <a href="#about">about</a>
       <a href="#build">project</a>
+      <a href="#experience">experience</a>
     </nav>
     <button class="pill" type="button" id="sayHi">say hi</button>
   </div>
 </header>
 <div class="wrap">
 
-  <!-- ═══════ HERO ═══════ -->
-  <section class="hero">
-    <div class="hero-inner">
+  <!-- ═══════ ABOUT ═══════ -->
+  <section id="about">
+    <div class="sec-label">
+      <span class="sec-num">01</span>
+      <span class="sec-name">About</span>
+    </div>
+    <div class="about-inner">
       <img class="hero-avatar" src="assets/avatar-soft.png" alt="Gao Xinyi">
-      <div class="hero-text">
-        <p class="hero-en"><em>I build, I connect</em> — hoping to create things that are useful and beautiful.</p>
+      <div class="about-text">
+        <p class="hero-en"><em>I build, I connect</em> — creating things that are useful and beautiful.</p>
         <p class="hero-cn">创造，表达，链接。把在这个世界穿梭时学到的东西，放在这里。</p>
+        <p class="about-lead">把模糊的用户体验问题，<br>拆成<em>可度量、可迭代</em>的系统工程。</p>
+        <div class="about-contact">
+          <a href="mailto:502025070036@smail.nju.edu.cn">502025070036@smail.nju.edu.cn</a>
+          <a href="tel:19822756119">19822756119</a>
+          <a href="https://github.com/J-ade-g" target="_blank" rel="noopener">github.com/J-ade-g</a>
+        </div>
       </div>
     </div>
   </section>
@@ -400,7 +514,7 @@
   <!-- ═══════ WORK ═══════ -->
   <section id="build">
     <div class="sec-label">
-      <span class="sec-num">01</span>
+      <span class="sec-num">02</span>
       <span class="sec-name">Project</span>
     </div>
 
@@ -408,7 +522,6 @@
       <a class="proj" href="#videos">
         <div class="p-top">
           <span class="p-status">active</span>
-          <span class="p-date">2026.11</span>
         </div>
         <h3>知识视频生产线</h3>
         <p class="p-desc">从口播脚本到成片的一条线：网页分镜、克隆音色配音、标签页录制、一条命令自动裁切、掐头去尾、按章切条。下面的片子就是它做的。</p>
@@ -418,7 +531,6 @@
         <div class="film">
           <div class="film-head">
             <h3>后训练：为什么模型需要被教才好用</h3>
-            <span class="film-meta">92 秒 · 3 章 16 个分镜 · 自动配音与剪辑</span>
           </div>
           <video id="player" controls preload="metadata" playsinline poster="assets/video/poster-demo.jpg">
             <source src="assets/video/demo-1080p.mp4" type="video/mp4">
@@ -438,7 +550,6 @@
       <a class="proj" href="#legal-film">
         <div class="p-top">
           <span class="p-status done">completed</span>
-          <span class="p-date">2026</span>
         </div>
         <h3>法律咨询 · 律径</h3>
         <p class="p-desc">法律咨询问答 + 可解释的法律检索工作流。回答逐条给出依据法条与出处，检索路径在右栏同步展开，让「为什么这么答」可见。</p>
@@ -448,7 +559,6 @@
         <div class="film">
           <div class="film-head">
             <h3>律径 · 法律咨询工作流</h3>
-            <span class="film-meta">23 秒 · 3× 加速 · 屏幕操作演示</span>
           </div>
           <video controls preload="metadata" playsinline poster="assets/video/poster-legal.jpg">
             <source src="assets/video/legal-workflow-3x.mp4" type="video/mp4">
@@ -462,7 +572,6 @@
       <div class="proj">
         <div class="p-top">
           <span class="p-status">active</span>
-          <span class="p-date">2026.11</span>
         </div>
         <h3>GEO 检测系统</h3>
         <p class="p-desc">单机 GEO 运营系统。用真实提问采集 DeepSeek、豆包、元宝、千问、百度的回答，计算提及率、首选率、声量份额与信源归因，产出顾问式报告。</p>
@@ -688,6 +797,84 @@
           <p class="rl-bar"><span>完整报告 · 核心信息已脱敏</span><b>在框内滚动阅读 ↓</b></p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ═══════ EXPERIENCE ═══════ -->
+  <section id="experience">
+    <div class="sec-label">
+      <span class="sec-num">03</span>
+      <span class="sec-name">Experience</span>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><b>7.67 万</b><span>条用户反馈归因分析</span></div>
+      <div class="stat"><b>51.5%</b><span>字数问题离线解决率</span></div>
+      <div class="stat"><b>+67%</b><span>语音 Agent 核心转化率</span></div>
+      <div class="stat"><b>800</b><span>条个性化后训练正例</span></div>
+    </div>
+
+    <article class="job">
+      <div class="job-head">
+        <h3>百度 · AI 搜索</h3>
+        <span class="job-role">AI产品经理</span>
+        <span class="job-date">2026.06 — 2026.10</span>
+      </div>
+      <ul class="job-points">
+        <li><b>主导搜索个性化专项</b>：针对意图模糊的 Query 定义「前序会话 + 地域」触发标准，产出 800 条后训练正例；触发精确率 80%，一期策略全量上线，覆盖约 200 万搜索 PV。</li>
+        <li><b>迭代 Critic 质量校验链路</b>：评估 Rubrics 与事实核查准确性，定位「事实点拆分过细」导致的幻觉，推动核查粒度与考点标准优化，Badcase 处理率 +1.8pp。</li>
+        <li><b>诊断扩覆盖实验的体验回退</b>：拆解换 Query 率上升背后的需求与答案偏差，制定字数、年级适配与直接交付标准，联合算法迭代，字数问题离线解决率 51.5%。</li>
+        <li><b>搭建满意度归因与监测</b>：分析 7.67 万条用户反馈，交叉拆解行业、意图与展示位置定位低满意度场景；用置换检验识别异常波动，建成每日更新的看板。</li>
+      </ul>
+    </article>
+
+    <article class="job">
+      <div class="job-head">
+        <h3>浪漫极客科技（出海）</h3>
+        <span class="job-role">AI产品经理</span>
+        <span class="job-date">2025.11 — 2026.04</span>
+      </div>
+      <ul class="job-points">
+        <li><b>独立负责泛心理语音 Agent 从 0 到 1</b>：覆盖状态流转、意图识别与澄清、记忆自然衰落、人格表现与进化，主导落地与迭代，上线后解读完成率 50%。</li>
+        <li><b>从 0 搭建语音塔罗三维测评体系</b>：拆为文字（响应时长 / 文学化程度）、记忆（调用频率 / 相关性 / 自然退化 / 归因合理性）、语音（打断处理 / STT 转录 / 语速），把主观体验转成可度量指标。</li>
+        <li><b>数据驱动体验优化</b>：用 PostHog 漏斗与录音抽样定位体验问题，重构麦克风状态机与进房引导；定位 ASR 断句过短导致 AI 打断用户，推动工程优化，核心转化率 +67%。</li>
+      </ul>
+    </article>
+  </section>
+
+  <!-- ═══════ CAPABILITIES ═══════ -->
+  <section id="capabilities">
+    <div class="sec-label">
+      <span class="sec-num">04</span>
+      <span class="sec-name">Capabilities</span>
+    </div>
+    <dl class="skill-list">
+      <dt>模型评测与链路诊断</dt>
+      <dd>线上 Query 的 Prompt 对比评测；Langfuse 追踪交互与执行链路；理想态定义、准召评估与 GSB 对比。</dd>
+      <dt>AI 应用与原型开发</dt>
+      <dd>Dify 编排工作流；Claude Code / Cursor / Codex 搭建可交互原型与自动化工具，覆盖任务拆解、检索路由与结果校验。</dd>
+      <dt>数据分析与产品设计</dt>
+      <dd>SQL / Python / R 数据处理与指标分析；PostHog 漏斗与埋点；Figma 原型与方案沟通。</dd>
+      <dt>语言</dt>
+      <dd>英语专业八级（TEM-8）；CET-6 611。</dd>
+    </dl>
+  </section>
+
+  <!-- ═══════ EDUCATION ═══════ -->
+  <section id="education">
+    <div class="sec-label">
+      <span class="sec-num">05</span>
+      <span class="sec-name">Education</span>
+    </div>
+    <div class="edu-line">
+      <h3>南京大学</h3>
+      <span class="edu-major">社会心理学</span>
+      <span class="edu-date">2025.09 — 至今</span>
+    </div>
+    <div class="edu-line">
+      <h3>上海外国语大学</h3>
+      <span class="edu-major">大数据管理与应用 &amp; 英语 双学位</span>
+      <span class="edu-date">2021.09 — 2025.06</span>
     </div>
   </section>
 

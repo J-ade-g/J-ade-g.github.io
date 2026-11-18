@@ -406,20 +406,20 @@ function makeImpulse(seconds, decay) {
   return buf;
 }
 
-// one soft chime: sine fundamental plus an inharmonic partial, long tail
+// one soft chime: low sine fundamental plus a quiet octave, slow attack, long tail
 function chime(t) {
-  const notes = [587.33, 659.25, 739.99, 880, 987.77, 1174.66];
+  const notes = [261.63, 293.66, 329.63, 392.0, 440.0, 523.25];
   const f = notes[(Math.random() * notes.length) | 0];
   // older iOS lacks StereoPanner; fall back to a plain gain node
   const pan = actx.createStereoPanner ? actx.createStereoPanner() : actx.createGain();
-  if (pan.pan) pan.pan.value = Math.random() * 1.6 - 0.8;
+  if (pan.pan) pan.pan.value = Math.random() * 1.2 - 0.6;
   pan.connect(damp);
 
-  [[1, 0.1, 3.6], [2.76, 0.022, 1.8]].forEach(([ratio, peak, tail]) => {
+  [[1, 0.048, 4.8], [2, 0.007, 2.2]].forEach(([ratio, peak, tail]) => {
     const o = actx.createOscillator(); o.type = "sine"; o.frequency.value = f * ratio;
     const g = actx.createGain();
     g.gain.setValueAtTime(0.0001, t);
-    g.gain.linearRampToValueAtTime(peak, t + 0.012);
+    g.gain.linearRampToValueAtTime(peak, t + 0.09);
     g.gain.exponentialRampToValueAtTime(0.0001, t + tail);
     o.connect(g).connect(pan);
     o.start(t); o.stop(t + tail + 0.1);
@@ -430,7 +430,7 @@ function scheduleChime() {
   setTimeout(() => {
     try { if (actx) chime(actx.currentTime + 0.05); } catch (e) {}
     scheduleChime();
-  }, 2200 + Math.random() * 4200);
+  }, 3400 + Math.random() * 5200);
 }
 
 function initAudio() {
@@ -439,26 +439,64 @@ function initAudio() {
   master = actx.createGain(); master.gain.value = 0;
   master.connect(actx.destination);
 
-  damp = actx.createBiquadFilter(); damp.type = "lowpass"; damp.frequency.value = 3000; damp.Q.value = 0.4;
-  const dry = actx.createGain(); dry.gain.value = 0.5;
-  const wet = actx.createGain(); wet.gain.value = 0.9;
-  const verb = actx.createConvolver(); verb.buffer = makeImpulse(3.2, 2.6);
+  damp = actx.createBiquadFilter(); damp.type = "lowpass"; damp.frequency.value = 1600; damp.Q.value = 0.35;
+  const dry = actx.createGain(); dry.gain.value = 0.55;
+  const wet = actx.createGain(); wet.gain.value = 0.7;
+  const verb = actx.createConvolver(); verb.buffer = makeImpulse(3.4, 2.4);
   damp.connect(dry).connect(master);
   damp.connect(verb).connect(wet).connect(master);
 
+  // very slow filter drift so the pad breathes instead of sitting still
+  const drift = actx.createOscillator(); drift.frequency.value = 0.035;
+  const driftGain = actx.createGain(); driftGain.gain.value = 200;
+  drift.connect(driftGain).connect(damp.frequency); drift.start();
+
+  // soft air bed: filtered noise that wanders a little
+  const nLen = Math.round(actx.sampleRate * 4);
+  const nBuf = actx.createBuffer(1, nLen, actx.sampleRate);
+  const nd = nBuf.getChannelData(0);
+  let pink = 0;
+  for (let i = 0; i < nLen; i++) {
+    pink = (pink + 0.02 * (Math.random() * 2 - 1)) / 1.02;
+    nd[i] = pink * 3.2;
+  }
+  const nSrc = actx.createBufferSource(); nSrc.buffer = nBuf; nSrc.loop = true;
+  const nFilt = actx.createBiquadFilter(); nFilt.type = "lowpass"; nFilt.frequency.value = 480; nFilt.Q.value = 0.5;
+  const nGain = actx.createGain(); nGain.gain.value = 0.028;
+  const nLfo = actx.createOscillator(); nLfo.frequency.value = 0.021;
+  const nLfoGain = actx.createGain(); nLfoGain.gain.value = 140;
+  nLfo.connect(nLfoGain).connect(nFilt.frequency); nLfo.start();
+  nSrc.connect(nFilt).connect(nGain).connect(damp); nSrc.start();
+
   // slow, breathing pad on open fifths — D3 A3 D4 F#4
-  const pad = actx.createGain(); pad.gain.value = 0.5; pad.connect(damp);
+  const pad = actx.createGain(); pad.gain.value = 0.55; pad.connect(damp);
+  const padOscs = [];
   [146.83, 220, 293.66, 369.99].forEach((f, i) => {
     const o = actx.createOscillator();
-    o.type = i < 2 ? "sine" : "triangle";
+    o.type = "sine";
     o.frequency.value = f;
-    o.detune.value = Math.random() * 8 - 4;
-    const g = actx.createGain(); g.gain.value = 0.065 / (i * 0.7 + 1);
+    o.detune.value = Math.random() * 12 - 6;
+    const g = actx.createGain(); g.gain.value = 0.07 / (i * 0.75 + 1);
     const lfo = actx.createOscillator(); lfo.frequency.value = 0.045 + i * 0.019;
-    const lg = actx.createGain(); lg.gain.value = g.gain.value * 0.55;
+    const lg = actx.createGain(); lg.gain.value = g.gain.value * 0.5;
     lfo.connect(lg).connect(g.gain); lfo.start();
     o.connect(g).connect(pad); o.start();
+    padOscs.push(o);
   });
+
+  // let the two upper voices change colour every half minute or so
+  let alt = false;
+  (function driftPad() {
+    setTimeout(() => {
+      if (actx && padOscs.length === 4) {
+        alt = !alt;
+        const now = actx.currentTime;
+        padOscs[2].frequency.setTargetAtTime(alt ? 349.23 : 293.66, now, 5);
+        padOscs[3].frequency.setTargetAtTime(alt ? 440 : 369.99, now, 5);
+      }
+      driftPad();
+    }, 26000 + Math.random() * 9000);
+  })();
 
   scheduleChime();
   audioReady = true;
@@ -510,10 +548,19 @@ soundBtn.addEventListener("click", () => {
 });
 
 // ── input (page scroll stays native; pointer only aims the camera) ──
-addEventListener("pointermove", (e) => {
-  mouse.x = (e.clientX / innerWidth) * 2 - 1;
-  mouse.y = -(e.clientY / innerHeight) * 2 + 1;
-});
+function aim(cx, cy) {
+  mouse.x = (cx / innerWidth) * 2 - 1;
+  mouse.y = -(cy / innerHeight) * 2 + 1;
+}
+addEventListener("pointermove", (e) => aim(e.clientX, e.clientY), { passive: true });
+addEventListener("touchstart", (e) => {
+  const touch = e.touches[0];
+  if (touch) aim(touch.clientX, touch.clientY);
+}, { passive: true });
+addEventListener("touchmove", (e) => {
+  const touch = e.touches[0];
+  if (touch) aim(touch.clientX, touch.clientY);
+}, { passive: true });
 
 // ── hover transition ─────────────────────────────────────
 let hover = 0, hoverTarget = 0;
@@ -559,7 +606,7 @@ function frame() {
   finalPass.uniforms.uTime.value = time;
   finalPass.uniforms.uSpeed.value = Math.min(1, speedFx * 4 + hover * 0.15);
   bloom.strength = 0.55 + Math.min(0.3, speedFx * 1.4);
-  if (damp && actx) damp.frequency.setTargetAtTime(3000 + hover * 1600, actx.currentTime, 0.3);
+  if (damp && actx) damp.frequency.setTargetAtTime(1600 + hover * 600, actx.currentTime, 0.3);
 
   composer.render();
   if (first) {

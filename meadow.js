@@ -351,6 +351,20 @@
     pulse = 1;
   }, { passive: true });
   addEventListener("pointerleave", () => { ptr.sx = ptr.sy = -9e3; });
+  addEventListener("touchstart", (e) => {
+    const touch = e.touches[0];
+    if (!touch) return;
+    ptr.sx = ptr.x = touch.clientX;
+    ptr.sy = ptr.y = touch.clientY;
+    pulse = 1;
+  }, { passive: true });
+  addEventListener("touchmove", (e) => {
+    const touch = e.touches[0];
+    if (!touch) return;
+    ptr.sx = touch.clientX;
+    ptr.sy = touch.clientY;
+  }, { passive: true });
+  addEventListener("touchend", () => { ptr.sx = ptr.sy = -9e3; }, { passive: true });
 
   let rt = 0;
   addEventListener("resize", () => {
